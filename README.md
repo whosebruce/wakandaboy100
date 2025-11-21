@@ -1,4 +1,4 @@
-# WakandaBoy100 Portfolio
+# Wakandaboy100 Portfolio
 
 Live site: https://wakandaboy100.com
 
