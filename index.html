@@ -4,490 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WakandaBoy100 | Director & Creator</title>
-    <style>
-        :root {
-            --color-bg: #050505;
-            --color-surface: #121212;
-            --color-text: #ffffff;
-            --color-text-secondary: #a0a0a0;
-            --color-accent: #8a2be2; 
-            --color-accent-hover: #9d4edd;
-            --color-border: rgba(255, 255, 255, 0.1);
-        }
+    
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Open Graph (Social Media Preview) -->
+    <meta property="og:image" content="images/og-image.jpg">
+    <meta property="og:title" content="WakandaBoy100 Portfolio">
+    <meta property="og:description" content="Director, Videographer, and Actor portfolio.">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <!-- GOOGLE ANALYTICS: Paste your "G-" code immediately below this line -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script> -->
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-            background: var(--color-bg);
-            color: var(--color-text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(138, 43, 226, 0.15) 0%, transparent 60%);
-            pointer-events: none;
-        }
-
-        .hero-content {
-            max-width: 1200px;
-            width: 100%;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-title {
-            font-size: clamp(3rem, 9vw, 7rem);
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.03em;
-            text-transform: uppercase;
-            background: linear-gradient(135deg, #fff 0%, var(--color-accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            opacity: 0;
-            animation: fadeInUp 1s ease forwards;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1rem, 3vw, 1.5rem);
-            color: var(--color-text-secondary);
-            margin-bottom: 2rem;
-            font-weight: 300;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.2s forwards;
-        }
-
-        .hero-cta {
-            display: inline-flex;
-            gap: 1rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.4s forwards;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-primary {
-            background: var(--color-accent);
-            color: #fff;
-        }
-
-        .btn-primary:hover {
-            background: var(--color-accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--color-text);
-            border: 1px solid var(--color-border);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--color-accent);
-            color: var(--color-accent);
-        }
-
-        /* Filter Section */
-        .filters {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-            padding: 0 1rem;
-        }
-
-        .filter-btn {
-            padding: 0.5rem 1.5rem;
-            background: transparent;
-            border: 1px solid var(--color-border);
-            color: var(--color-text-secondary);
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--color-accent);
-            border-color: var(--color-accent);
-            color: white;
-        }
-
-        /* Portfolio Grid */
-        .portfolio {
-            padding: 2rem 2rem 6rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: clamp(2rem, 5vw, 3rem);
-            text-align: center;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-        
-        .section-desc {
-            text-align: center;
-            color: var(--color-text-secondary);
-            margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: var(--color-surface);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--color-border);
-            transition: all 0.4s ease;
-            cursor: pointer;
-            opacity: 0;
-            transform: translateY(30px);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card.visible {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--color-accent);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-        }
-
-        .project-image {
-            width: 100%;
-            height: 220px;
-            background: #1a1a1a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-            opacity: 0.8;
-        }
-
-        .project-card:hover .project-image img {
-            transform: scale(1.05);
-            opacity: 1;
-        }
-
-        /* Play icon overlay */
-        .play-icon {
-            position: absolute;
-            z-index: 2;
-            width: 50px;
-            height: 50px;
-            background: rgba(0,0,0,0.6);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid white;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover .play-icon {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .project-content {
-            padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-meta {
-            font-size: 0.8rem;
-            color: var(--color-accent);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .project-title {
-            font-size: 1.35rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            line-height: 1.3;
-        }
-
-        .project-role {
-            font-size: 0.9rem;
-            color: #fff;
-            margin-bottom: 1rem;
-            font-style: italic;
-        }
-
-        .project-description {
-            color: var(--color-text-secondary);
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            flex-grow: 1;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: auto;
-        }
-
-        .tag {
-            padding: 0.25rem 0.75rem;
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--color-text-secondary);
-            border-radius: 4px;
-            font-size: 0.75rem;
-            border: 1px solid var(--color-border);
-        }
-
-        /* About Section */
-        .about {
-            padding: 6rem 2rem;
-            background: var(--color-surface);
-            border-top: 1px solid var(--color-border);
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .about-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-image {
-            width: 100%;
-            aspect-ratio: 1/1;
-            background: #222;
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .about-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .about-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-text p {
-            color: var(--color-text-secondary);
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 6rem 2rem;
-            text-align: center;
-        }
-
-        .contact-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Footer */
-        footer {
-            padding: 2rem;
-            text-align: center;
-            color: var(--color-text-secondary);
-            border-top: 1px solid var(--color-border);
-            font-size: 0.9rem;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 1000;
-            padding: 2rem;
-            overflow-y: auto;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal.active {
-            display: flex;
-            align-items: flex-start; /* Changed from center to handle long content better */
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: var(--color-surface);
-            border-radius: 16px;
-            max-width: 1000px;
-            width: 100%;
-            position: relative;
-            border: 1px solid var(--color-border);
-            animation: scaleIn 0.3s ease;
-            margin: auto; /* Centers vertically if flex-start is used */
-            overflow: hidden;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            width: 40px;
-            height: 40px;
-            border: none;
-            background: rgba(0,0,0,0.5);
-            color: #fff;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 10;
-        }
-
-        .modal-close:hover {
-            background: var(--color-accent);
-        }
-
-        .modal-media-container {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: #000;
-            position: relative;
-        }
-
-        .modal-media-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .modal-info {
-            padding: 2rem;
-        }
-
-        .modal-title {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-subtitle {
-            color: var(--color-accent);
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .modal-description {
-            color: var(--color-text-secondary);
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .about-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            
-            .hero-title {
-                font-size: 3rem;
-            }
-
-            .modal-content {
-                margin-top: 4rem;
-            }
-        }
-    </style>
 </head>
 <body>
-    <!-- Hero Section -->
+
+    <!-- Hero Section with Video Background -->
     <section class="hero">
+        <div class="video-background">
+            <!-- Upload a video named 'hero-reel.mp4' to your images folder -->
+            <video autoplay muted loop playsinline poster="images/hero-poster.jpg">
+                <source src="images/hero-reel.mp4" type="video/mp4">
+            </video>
+            <div class="overlay"></div>
+        </div>
+
         <div class="hero-content">
             <h1 class="hero-title">WakandaBoy100</h1>
             <p class="hero-subtitle">Director • Videographer • Actor</p>
@@ -503,7 +50,6 @@
         <h2 class="section-title">Selected Works</h2>
         <p class="section-desc">Music Videos, Commercials, and Acting performances.</p>
         
-        <!-- Filters -->
         <div class="filters">
             <button class="filter-btn active" onclick="filterProjects('all')">All Work</button>
             <button class="filter-btn" onclick="filterProjects('video')">Music Videos</button>
@@ -512,7 +58,7 @@
         </div>
 
         <div class="grid" id="projectGrid">
-            <!-- Projects inserted via JS -->
+            <!-- Projects loaded from script.js -->
         </div>
     </section>
 
@@ -520,8 +66,7 @@
     <section id="about" class="about">
         <div class="about-container">
             <div class="about-image">
-                <!-- REPLACE THIS SRC WITH YOUR PHOTO URL -->
-                <img src="https://via.placeholder.com/500x500/1a1a1a/8a2be2?text=WakandaBoy100" alt="WakandaBoy100">
+                <img src="images/profile.jpg" alt="WakandaBoy100" onerror="this.src='https://via.placeholder.com/500x500/1a1a1a/8a2be2?text=WakandaBoy100'">
             </div>
             <div class="about-text">
                 <h2>About Me</h2>
@@ -532,35 +77,56 @@
                 <p>
                     Whether I'm behind the camera directing music videos for major artists, editing cinematic content, 
                     or performing on screen, my goal is always the same: to leave a lasting impact.
-                    I've worked with top-tier talent and brands, delivering quality visuals that stand out in today's digital landscape.
                 </p>
-                <div style="margin-top: 2rem;">
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                
+                <!-- NEW: Download EPK Button -->
+                <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                    <a href="assets/WakandaBoy100_EPK.pdf" download class="btn btn-secondary">
+                        📄 Download EPK / Resume
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact Section with Form -->
     <section id="contact" class="contact">
         <div class="contact-content">
             <h2 class="section-title">Let's Create</h2>
-            <p style="color: var(--color-text-secondary); margin-bottom: 2rem;">
-                Looking for a director for your next music video or an actor for your next project?
+            <p class="section-desc">
+                Fill out the form below to inquire about bookings, rates, and availability.
             </p>
-            <!-- REPLACE WITH YOUR EMAIL -->
-            <a href="mailto:booking@wakandaboy100.com" class="btn btn-primary">Send an Email</a>
+
+            <!-- FORM: Replace 'YOUR_FORMSPREE_ID' with your actual ID from formspree.io -->
+            <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" class="contact-form">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="_replyto" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <select name="service">
+                        <option value="" disabled selected>Project Type</option>
+                        <option value="Music Video">Music Video</option>
+                        <option value="Acting Role">Acting Role</option>
+                        <option value="Commercial">Commercial/Brand</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" rows="5" placeholder="Tell me about the project (Budget, Timeline, Concept)..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Send Booking Request</button>
+            </form>
             
-            <div style="margin-top: 3rem; display: flex; justify-content: center; gap: 1.5rem;">
-                <!-- Social Links -->
-                <a href="#" style="color: white; font-size: 1.5rem;">Instagram</a>
-                <a href="#" style="color: white; font-size: 1.5rem;">YouTube</a>
-                <a href="#" style="color: white; font-size: 1.5rem;">Twitter</a>
+            <div class="social-links">
+                <a href="#">Instagram</a> • <a href="#">YouTube</a> • <a href="#">Twitter</a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2025 WakandaBoy100. All rights reserved.</p>
     </footer>
@@ -569,12 +135,7 @@
     <div class="modal" id="projectModal">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
-            
-            <!-- Video Container -->
-            <div class="modal-media-container" id="modalMedia">
-                <!-- Iframe gets injected here -->
-            </div>
-
+            <div class="modal-media-container" id="modalMedia"></div>
             <div class="modal-info">
                 <div class="project-meta" id="modalCategory">Category</div>
                 <h3 class="modal-title" id="modalTitle">Project Title</h3>
@@ -585,191 +146,7 @@
         </div>
     </div>
 
-    <script>
-        /* 
-           ---------------------------------------------------------
-           DATA CONFIGURATION
-           Add your projects here.
-           
-           Types supported for 'category': 'video', 'acting', 'commercial'
-           'youtubeId': The code at the end of a YouTube URL (e.g. dQw4w9WgXcQ)
-           ---------------------------------------------------------
-        */
-        const projects = [
-            {
-                id: 1,
-                title: "Hit Single Visuals",
-                artist: "Big Artist Name",
-                category: "video",
-                role: "Director & Editor",
-                youtubeId: "placeholder", // Replace with real YouTube ID
-                image: "https://via.placeholder.com/600x400/111/333?text=Music+Video+1",
-                description: "Directed the official music video for [Artist Name]. The concept focused on high-energy performance and neon aesthetics.",
-                tags: ["Music Video", "Direction", "4K"]
-            },
-            {
-                id: 2,
-                title: "Summer Vibe Anthem",
-                artist: "Famous Rapper",
-                category: "video",
-                role: "Director of Photography",
-                youtubeId: "placeholder", 
-                image: "https://via.placeholder.com/600x400/111/333?text=Music+Video+2",
-                description: "Captured the summer vibes for this chart-topping track. Shot on location in Miami featuring complex drone work.",
-                tags: ["Cinematography", "Outdoor", "Drone"]
-            },
-            {
-                id: 3,
-                title: "TV Series: Crime Drama",
-                artist: "Network TV",
-                category: "acting",
-                role: "Supporting Actor (Role: Detective)",
-                youtubeId: "", // Leave empty if no video, will show image only
-                image: "https://via.placeholder.com/600x400/111/333?text=Acting+Gig",
-                description: "Appeared in Season 3 Episode 4 as Detective Johnson. Delivered key dialogue in a high-stakes interrogation scene.",
-                tags: ["Acting", "Drama", "TV"]
-            },
-            {
-                id: 4,
-                title: "Streetwear Brand Launch",
-                artist: "Fashion Brand",
-                category: "commercial",
-                role: "Creative Director",
-                youtubeId: "placeholder", 
-                image: "https://via.placeholder.com/600x400/111/333?text=Commercial",
-                description: "Produced the launch campaign for a new luxury streetwear line. Managed the entire visual identity from video to stills.",
-                tags: ["Fashion", "Commercial", "Branding"]
-            },
-            {
-                id: 5,
-                title: "Underground Rap Cypher",
-                artist: "Various Artists",
-                category: "video",
-                role: "Director & Camera",
-                youtubeId: "placeholder",
-                image: "https://via.placeholder.com/600x400/111/333?text=Cypher",
-                description: "A raw, one-take style video capturing the energy of the city's best underground talent.",
-                tags: ["Music Video", "Raw", "One-Take"]
-            },
-            {
-                id: 6,
-                title: "Short Film: The Night",
-                artist: "Independent",
-                category: "acting",
-                role: "Lead Actor",
-                youtubeId: "placeholder",
-                image: "https://via.placeholder.com/600x400/111/333?text=Short+Film",
-                description: "Starred as the protagonist in this award-winning short film about urban isolation.",
-                tags: ["Acting", "Short Film", "Drama"]
-            }
-        ];
-
-        // Select DOM Elements
-        const projectGrid = document.getElementById('projectGrid');
-        const filterBtns = document.querySelectorAll('.filter-btn');
-
-        // Initial Render
-        renderProjects(projects);
-
-        // Filter Function
-        function filterProjects(category) {
-            // Update buttons
-            filterBtns.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            // Filter data
-            const filtered = category === 'all' 
-                ? projects 
-                : projects.filter(p => p.category === category);
-            
-            // Clear and render
-            projectGrid.innerHTML = '';
-            renderProjects(filtered);
-        }
-
-        // Render Function
-        function renderProjects(items) {
-            items.forEach((project, index) => {
-                const card = document.createElement('div');
-                card.className = 'project-card';
-                card.style.animationDelay = `${index * 0.1}s`;
-                
-                // Create Card HTML
-                card.innerHTML = `
-                    <div class="project-image">
-                        <img src="${project.image}" alt="${project.title}">
-                        ${project.youtubeId ? '<div class="play-icon">▶</div>' : ''}
-                    </div>
-                    <div class="project-content">
-                        <div class="project-meta">${project.artist || 'Personal Project'}</div>
-                        <h3 class="project-title">${project.title}</h3>
-                        <div class="project-role">${project.role}</div>
-                        <p class="project-description">${project.description.substring(0, 80)}...</p>
-                        <div class="project-tags">
-                            ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                        </div>
-                    </div>
-                `;
-                
-                card.addEventListener('click', () => openModal(project));
-                projectGrid.appendChild(card);
-                
-                // Trigger animation
-                setTimeout(() => card.classList.add('visible'), 50);
-            });
-        }
-
-        // Modal functionality
-        const modal = document.getElementById('projectModal');
-        const modalClose = document.getElementById('modalClose');
-        const modalMedia = document.getElementById('modalMedia');
-
-        function openModal(project) {
-            // Populate Text
-            document.getElementById('modalTitle').textContent = project.title;
-            document.getElementById('modalRole').textContent = project.role;
-            document.getElementById('modalCategory').textContent = project.artist;
-            document.getElementById('modalDescription').textContent = project.description;
-            document.getElementById('modalTags').innerHTML = project.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
-            
-            // Handle Media (Video or Image)
-            if (project.youtubeId && project.youtubeId !== "placeholder") {
-                modalMedia.innerHTML = `
-                    <iframe 
-                        src="https://www.youtube.com/embed/${project.youtubeId}?autoplay=1" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>`;
-            } else {
-                // Fallback if no video ID is provided
-                modalMedia.innerHTML = `<img src="${project.image}" style="width:100%; height:100%; object-fit:cover;" alt="${project.title}">`;
-            }
-            
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            modal.classList.remove('active');
-            // Stop video by clearing iframe
-            modalMedia.innerHTML = ''; 
-            document.body.style.overflow = 'auto';
-        }
-
-        modalClose.addEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+    <!-- Link to your JS file -->
+    <script src="script.js"></script>
 </body>
 </html>
