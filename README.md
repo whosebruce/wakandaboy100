@@ -1,34 +1,16 @@
-# WakandaBoy100 Portfolio
+# WAKANDABOY100 Artist Portfolio
 
-Professional portfolio site for Director & Creator WakandaBoy100.
+Static GitHub Pages portfolio for **WAKANDABOY100** at <https://wakandaboy100.com>.
 
-## 📁 File Structure
-*   **index.html**: The main structure of the site.
-*   **style.css**: All colors, fonts, and layout styles.
-*   **script.js**: Contains the **Project List** and site logic.
-*   **images/**: (Create this folder) Store your headshots and video thumbnails here.
-*   **assets/**: (Create this folder) Store your PDF Resume/EPK here.
+## What is included
 
-## 🛠 How to Update
+- Mobile-first artist/creator landing page
+- Featured YouTube embed for “My Baby” with 300K+ proof point
+- Selected music video cards using public YouTube thumbnails
+- Streaming/social links for YouTube, Instagram, Facebook, X, TikTok, SoundCloud, Spotify, Apple Music, Audiomack, and Pandora
+- SEO metadata, Open Graph/Twitter card tags, JSON-LD structured data
+- `robots.txt`, `sitemap.xml`, favicon, and 1200×630 Open Graph image
 
-### 1. Enable the Contact Form
-1.  Go to [Formspree.io](https://formspree.io) and sign up (Free).
-2.  Create a "New Form" and copy the **Form ID** URL.
-3.  Open `index.html` and find line 79.
-4.  Replace `YOUR_FORMSPREE_ID` with your actual ID.
+## Easy future updates
 
-### 2. Add Your Own Projects
-1.  Open `script.js`.
-2.  Edit the `projects` list at the top.
-3.  Change titles, roles, and paste your YouTube Video IDs.
-4.  Upload thumbnail images to `images/` and update the file paths.
-
-### 3. Change the Video Background
-1.  Create a folder named `images`.
-2.  Upload a short video named `hero-reel.mp4` (Try to keep it under 5MB).
-3.  Upload a photo named `profile.jpg` for your About section.
-
-### 4. Enable Google Analytics
-1.  Open `index.html`.
-2.  Look for the `GOOGLE ANALYTICS` comment in the `<head>`.
-3.  Uncomment the code and paste your `G-XXXXXX` ID.
+When WAKANDABOY100 sends approved photos, replace the temporary public thumbnail imagery in `index.html` and regenerate `og-image.png` if desired. The design intentionally keeps images swappable without changing the page structure.
