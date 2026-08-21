@@ -47,5 +47,5 @@
 
 - WAKANDABOY100, Collins Wewa, and The Ultimate Cardio remain explicit entities.
 - The Ultimate Cardio product direction can be shown before launch, but checkout availability and price cannot be implied.
-- Fourthwall is the selected future storefront; no Shopify URLs.
+- Checkout remains offline until an official release is announced.
 - Never invent testimonials, clients, prices, inventory, shipping promises, or product photography.

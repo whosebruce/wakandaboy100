@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://wakandaboy100.com"
 OG = f"{SITE}/og-image.png?v=4"
+MEDIA = json.loads((ROOT / "content/media.json").read_text(encoding="utf-8"))
 
 SOCIALS = [
     ("YouTube", "https://www.youtube.com/@wakandaboy100"),
@@ -159,6 +160,22 @@ def document(*, title: str, description: str, path: str, active: str, body: str,
     return page.replace('href="/', f'href="{prefix}').replace('src="/', f'src="{prefix}')
 
 
+def media_cards(items: list[dict]) -> str:
+    cards = []
+    for item in items:
+        title = html.escape(item["title"])
+        platform = html.escape(item["platform"])
+        url = html.escape(item["url"], quote=True)
+        thumbnail = html.escape(item["thumbnail"], quote=True)
+        description = html.escape(item.get("description", ""))
+        cards.append(
+            f'<a class="work-card" href="{url}" target="_blank" rel="noopener">'
+            f'<img loading="lazy" src="{thumbnail}" alt="{title} comedy skit cover" width="1200" height="675">'
+            f'<div class="card-body"><span class="kicker">{platform}</span><h3>{title}</h3><p>{description}</p></div></a>'
+        )
+    return "".join(cards)
+
+
 HOME = """
 <section class="shell hero" aria-labelledby="home-title">
   <div>
@@ -201,8 +218,8 @@ HOME = """
   <a class="platform-card" href="https://soundcloud.com/user-684213263" target="_blank" rel="noopener"><span>SoundCloud</span><span>→</span></a>
 </div></section>
 <section class="shop-band"><div class="shell section shop-grid">
-  <div class="shop-image"><img loading="lazy" src="/assets/images/the-ultimate-cardio-shirt.webp" alt="Front and back concept for The Ultimate Cardio shirt" width="1600" height="1195"><span class="drop-badge">Drop 001</span></div>
-  <div class="shop-copy"><p class="eyebrow">The merch · In development</p><h2 class="display">The Ultimate<br>Cardio</h2><h3>Signature athletic tee</h3><p>The approved direction pairs a heather-grey athletic shirt with a compact collegiate chest mark and a bold full-width back statement.</p><span class="status-chip">Fourthwall storefront setup pending owner invite</span><div class="actions"><a class="button light" href="/merch/the-ultimate-cardio/">See the design</a></div><div class="future-list" aria-label="Future concept lane"><span>Hoodie</span><span>Dad cap</span><span>Stickers</span><span>Tote</span><span>Poster</span></div></div>
+  <div class="shop-image"><img loading="lazy" src="/assets/images/the-ultimate-cardio-campaign.webp" alt="The Ultimate Cardio shirt — front and back" width="1600" height="1200"><span class="drop-badge">Drop 001</span></div>
+  <div class="shop-copy"><p class="eyebrow">WAKANDABOY100 merch</p><h2 class="display">The Ultimate<br>Cardio</h2><h3>Drop 001</h3><p>The first WAKANDABOY100 merchandise drop is taking shape. Full release details are coming soon.</p><span class="status-chip">Coming soon</span><div class="actions"><a class="button light" href="/merch/the-ultimate-cardio/">Preview the drop</a></div></div>
 </div></section>
 """
 
@@ -211,14 +228,17 @@ ABOUT = """
 <section class="shell section split"><div class="prose"><p class="eyebrow">About WAKANDABOY100</p><h2>Performer first</h2><p>The WAKANDABOY100 identity is built around movement and presence. Music, comedy, choreography, creator videos, and private performances all lead back to the same idea: make the moment feel like a show.</p><h3>Independent by design</h3><p>The catalog is self-directed and public-facing, with official releases and performance proof available through YouTube, streaming services, and social platforms.</p><h3>One name, one entity</h3><p>Collins Wewa, Collins Wewa TV, and WAKANDABOY100 refer to the same artist. This official website is the home that connects those public identities.</p></div><aside class="fact-panel"><h2>Brand pillars</h2><ul class="fact-list"><li><strong>High energy</strong><span>Bold type, movement, physical performance, and immediate impact.</span></li><li><strong>Self-made</strong><span>An independent catalog built in public without waiting for permission.</span></li><li><strong>Playful</strong><span>Comedy and personality keep the work confident without becoming corporate.</span></li><li><strong>Replayable</strong><span>Music videos and short-form moments designed to earn another watch.</span></li></ul></aside></section>
 """
 
-VIDEOS = """
+VIDEOS = f"""
 <section class="page-hero"><div class="shell page-hero-grid"><div><p class="eyebrow">Official videos and performance proof</p><h1 class="display">Watch the<br>work</h1><p class="lede">Music videos, choreography, live performance, comedy, and short-form personality from Collins Wewa—WAKANDABOY100.</p></div><div class="page-mark"><img src="/assets/images/wakandaboy100-dancer.svg" alt="WAKANDABOY100 dancer mark" width="300" height="330"></div></div></section>
 <section class="shell section"><article class="feature-card"><a class="video-poster" href="https://www.youtube.com/watch?v=EUQzS9nLWl8" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/EUQzS9nLWl8/maxresdefault.jpg" alt="Collins Wewa — My Baby official music video" width="1280" height="720"><span class="play-badge">Play</span></a><div class="feature-meta"><div><p class="eyebrow">Flagship release · 316K+ views</p><h3>My Baby</h3></div><a class="button primary" href="https://www.youtube.com/watch?v=EUQzS9nLWl8" target="_blank" rel="noopener">Watch now</a></div></article>
 <div class="card-grid">
 <a class="work-card" href="https://www.youtube.com/watch?v=6dMGPwwr9bQ" target="_blank" rel="noopener"><img loading="lazy" src="https://i.ytimg.com/vi/6dMGPwwr9bQ/maxresdefault.jpg" alt="Heart Broken music video thumbnail" width="640" height="400"><div class="card-body"><span class="kicker">Official music video</span><h3>Heart Broken</h3><p>Performance-driven visual storytelling.</p></div></a>
 <a class="work-card" href="https://www.youtube.com/watch?v=vwn4TQy9kw8" target="_blank" rel="noopener"><img loading="lazy" src="https://i.ytimg.com/vi/vwn4TQy9kw8/hqdefault.jpg" alt="Pull the Plug music video thumbnail" width="640" height="400"><div class="card-body"><span class="kicker">Produced and choreographed</span><h3>Pull the Plug</h3><p>A movement-led WAKANDABOY100 release.</p></div></a>
 <a class="work-card" href="https://www.youtube.com/watch?v=XXKCSIO0yBc" target="_blank" rel="noopener"><img loading="lazy" src="https://i.ytimg.com/vi/XXKCSIO0yBc/maxresdefault.jpg" alt="Dance With Me performance thumbnail" width="640" height="400"><div class="card-body"><span class="kicker">Live performance</span><h3>Dance With Me</h3><p>A stage-forward performance available across streaming platforms.</p></div></a>
-</div><div class="contact-panel"><div><h2>More from Collins Wewa</h2><p>Browse the full long-form catalog or jump directly into short-form creator videos.</p></div><div class="actions"><a class="button primary" href="https://www.youtube.com/@wakandaboy100" target="_blank" rel="noopener">YouTube channel</a><a class="button" href="https://www.youtube.com/@wakandaboy100/shorts" target="_blank" rel="noopener">YouTube Shorts</a></div></div></section>
+</div>
+<div class="section-head" style="margin-top:64px"><div><p class="eyebrow">Comedy skits</p><h2 class="display">Laugh with<br>WAKANDABOY100</h2><p class="intro">Comedy clips stay hosted on their original social platforms while this official site organizes the catalog.</p></div><a class="button" href="https://www.instagram.com/wakandaboyofficial/" target="_blank" rel="noopener">More on Instagram →</a></div>
+<div class="card-grid">{media_cards(MEDIA["comedy"])}</div>
+<div class="contact-panel"><div><h2>More from Collins Wewa</h2><p>Browse the full long-form catalog or jump directly into short-form creator videos.</p></div><div class="actions"><a class="button primary" href="https://www.youtube.com/@wakandaboy100" target="_blank" rel="noopener">YouTube channel</a><a class="button" href="https://www.youtube.com/@wakandaboy100/shorts" target="_blank" rel="noopener">YouTube Shorts</a></div></div></section>
 """
 
 MUSIC = """
@@ -240,9 +260,9 @@ BOOKING = """
 """
 
 MERCH = """
-<section class="page-hero"><div class="shell page-hero-grid"><div><p class="eyebrow">WAKANDABOY100 merchandise</p><h1 class="display">The Ultimate<br>Cardio</h1><p class="lede">The first WAKANDABOY100 merchandise direction: a clean athletic-heather tee built around the phrase that matches the movement.</p></div><div class="page-mark"><img src="/assets/images/wakandaboy100-dancer.svg" alt="WAKANDABOY100 dancer mark" width="300" height="330"></div></div></section>
-<section class="shell section merch-detail"><div class="shop-image"><img src="/assets/images/the-ultimate-cardio-shirt.webp" alt="Front and back concept for The Ultimate Cardio shirt" width="1600" height="1195"><span class="drop-badge">Drop 001 · Approved direction</span></div><div class="prose"><p class="eyebrow">Signature athletic tee</p><h2>Front quiet.<br>Back loud.</h2><p>The approved visual uses a compact collegiate chest lockup and a full-width condensed back statement on athletic-heather grey.</p><div class="merch-specs"><div><strong>Front</strong><span>Arched “The Ultimate” over “Cardio” at the left chest.</span></div><div><strong>Back</strong><span>Oversized “THEULTIMATECARDIO” across the upper back.</span></div><div><strong>Garment direction</strong><span>Bella+Canvas 3001 · Athletic Heather.</span></div><div><strong>Production</strong><span>Front and back DTG · final vendor proof pending.</span></div></div><p class="notice"><strong>Store status:</strong> Fourthwall Free is selected. The public checkout remains offline until Wewa creates the owner account, invites Bruce Works as Manager, and approves the vendor proof.</p><div class="actions"><span class="button" aria-disabled="true">Store coming soon</span></div></div></section>
-<section class="shop-band"><div class="shell section"><div class="section-head"><div><p class="eyebrow">Future concept lane</p><h2 class="display">Build demand<br>before inventory</h2></div><p class="intro" style="color:#b8b8be">Additional products remain concepts until real audience demand supports the work. No placeholder item is being represented as available for purchase.</p></div><div class="future-list"><span>Hoodie</span><span>Dad cap</span><span>Sticker pack</span><span>Tote</span><span>Poster</span></div></div></section>
+<section class="page-hero"><div class="shell page-hero-grid"><div><p class="eyebrow">WAKANDABOY100 merchandise</p><h1 class="display">The Ultimate<br>Cardio</h1><p class="lede">Drop 001 from WAKANDABOY100. Full release details are coming soon.</p></div><div class="page-mark"><img src="/assets/images/wakandaboy100-dancer.svg" alt="WAKANDABOY100 dancer mark" width="300" height="330"></div></div></section>
+<section class="shell section merch-detail"><div class="shop-image"><img src="/assets/images/the-ultimate-cardio-campaign.webp" alt="The Ultimate Cardio shirt — front and back" width="1600" height="1200"><span class="drop-badge">Drop 001</span></div><div class="prose"><p class="eyebrow">WAKANDABOY100 merch</p><h2>The Ultimate<br>Cardio</h2><p>The first WAKANDABOY100 merchandise drop is taking shape. Launch details and availability will be announced here.</p><div class="actions"><span class="button" aria-disabled="true">Coming soon</span></div></div></section>
+<section class="shell section compact" aria-labelledby="drop-gallery-title"><div class="section-head"><div><p class="eyebrow">Drop 001 preview</p><h2 class="display" id="drop-gallery-title">Front / Back</h2></div></div><div class="merch-gallery"><figure><img loading="lazy" src="/assets/images/the-ultimate-cardio-front.webp" alt="Front view of The Ultimate Cardio shirt" width="1200" height="1200"><figcaption>Front</figcaption></figure><figure><img loading="lazy" src="/assets/images/the-ultimate-cardio-back.webp" alt="Back view of The Ultimate Cardio shirt" width="1200" height="1200"><figcaption>Back</figcaption></figure></div></section>
 """
 
 PAGES = [
@@ -251,7 +271,7 @@ PAGES = [
     ("videos/index.html", dict(title="WAKANDABOY100 Videos | Collins Wewa", description="Watch WAKANDABOY100 music videos and performance work by Collins Wewa, including My Baby, Heart Broken, Pull the Plug, and Dance With Me.", path="/videos/", active="videos", body=VIDEOS, page_type="CollectionPage")),
     ("music/index.html", dict(title="WAKANDABOY100 Music | Stream Collins Wewa", description="Stream WAKANDABOY100 music by Collins Wewa on Spotify, Apple Music, SoundCloud, Audiomack, Pandora, and YouTube.", path="/music/", active="music", body=MUSIC, page_type="CollectionPage")),
     ("booking/index.html", dict(title="Book WAKANDABOY100 | Collins Wewa Performances", description="Request Collins Wewa—WAKANDABOY100—for birthdays, parties, private events, appearances, and performance opportunities.", path="/booking/", active="booking", body=BOOKING, page_type="ContactPage")),
-    ("merch/the-ultimate-cardio/index.html", dict(title="The Ultimate Cardio by WAKANDABOY100 | Merch", description="Explore The Ultimate Cardio, the first merchandise direction from Collins Wewa and WAKANDABOY100, built around an athletic-heather signature tee.", path="/merch/the-ultimate-cardio/", active="merch", body=MERCH, page_type="CollectionPage")),
+    ("merch/the-ultimate-cardio/index.html", dict(title="The Ultimate Cardio by WAKANDABOY100 | Merch", description="Preview The Ultimate Cardio, Drop 001 from Collins Wewa and WAKANDABOY100. Launch details and availability are coming soon.", path="/merch/the-ultimate-cardio/", active="merch", body=MERCH, page_type="CollectionPage")),
 ]
 
 

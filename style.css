@@ -76,7 +76,7 @@ button,input,textarea{font:inherit}
 .feature-meta h3{margin:4px 0 0;font-family:var(--display);font-size:2rem;font-weight:400;text-transform:uppercase}
 .card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:20px}
 .work-card{overflow:hidden;border:1px solid var(--line);border-radius:8px;background:var(--white)}
-.work-card img{width:100%;aspect-ratio:16/10;object-fit:cover;background:#c8c8cd}
+.work-card img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;background:#c8c8cd}
 .work-card .card-body{padding:17px 18px 20px}
 .work-card .kicker{color:var(--muted);font-family:var(--ui);font-size:.78rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
 .work-card h3{margin:5px 0 0;font-family:var(--display);font-weight:400;font-size:1.45rem;text-transform:uppercase}
@@ -89,7 +89,7 @@ button,input,textarea{font:inherit}
 .shop-band .eyebrow{color:#a6a6ad}
 .shop-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:30px;align-items:center}
 .shop-image{position:relative;overflow:hidden;border-radius:8px;background:#eee}
-.shop-image img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.shop-image img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
 .drop-badge{position:absolute;left:15px;top:15px;background:white;color:var(--ink);padding:6px 11px;font-family:var(--ui);font-size:.76rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
 .shop-copy h2{font-size:clamp(3.4rem,7vw,5.4rem)}
 .shop-copy h3{margin:28px 0 0;font-family:var(--display);font-size:2.4rem;font-weight:400;text-transform:uppercase;line-height:.96}
@@ -124,6 +124,10 @@ button,input,textarea{font:inherit}
 .contact-panel p{margin:7px 0 0;color:var(--muted)}
 .merch-detail{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
 .merch-detail .shop-image img{aspect-ratio:auto}
+.merch-gallery{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.merch-gallery figure{margin:0;overflow:hidden;border:1px solid var(--line);border-radius:8px;background:var(--white)}
+.merch-gallery img{width:100%;height:auto;aspect-ratio:1;object-fit:cover}
+.merch-gallery figcaption{padding:12px 16px;border-top:1px solid var(--line);font-family:var(--ui);font-weight:700;letter-spacing:.16em;text-transform:uppercase}
 .merch-specs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0}
 .merch-specs div{border-top:1px solid var(--line);padding-top:12px}
 .merch-specs strong{display:block;font-family:var(--ui);font-size:.8rem;letter-spacing:.16em;text-transform:uppercase}

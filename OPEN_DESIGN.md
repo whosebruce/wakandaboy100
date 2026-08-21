@@ -26,7 +26,7 @@ This Git repository is the production source of truth. It is imported into Open 
 3. Keep public navigation on clean directory-index routes; do not introduce HashRouter or section-fragment navigation.
 4. Do not ship `.dc.html`, `support.js`, `deck-stage.js`, Mustache markers, or Open Design prototype runtime helpers.
 5. Do not invent prices, products, biography facts, availability, reviews, fulfillment promises, or social proof.
-6. Fourthwall Free is the selected commerce platform. Until Wewa completes owner setup, merch remains clearly `coming soon` with no dead checkout URL.
+6. Until an official release is announced, merch remains clearly `coming soon` with no dead checkout URL.
 7. After editing generated HTML, mirror the approved change into `scripts/build_site.py` or the next build will overwrite it.
 8. Run `python scripts/build_site.py && python scripts/verify_site.py`, then verify desktop and 390px mobile screenshots before publication.
 

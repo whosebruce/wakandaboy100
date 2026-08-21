@@ -19,7 +19,11 @@ EXPECTED = {
     "booking/index.html": "https://wakandaboy100.com/booking/",
     "merch/the-ultimate-cardio/index.html": "https://wakandaboy100.com/merch/the-ultimate-cardio/",
 }
-FORBIDDEN = ("{{", "<sc-", "<x-dc", "support.js", "data-dc-", "shopify.com", "shop.wakandaboy100.com")
+FORBIDDEN = (
+    "{{", "<sc-", "<x-dc", "support.js", "data-dc-", "shopify.com", "shop.wakandaboy100.com",
+    "Fourthwall", "Bella+Canvas", "DTG", "vendor proof", "owner invite", "approved direction",
+    "garment direction", "Front quiet", "Store status:",
+)
 
 
 class AuditParser(HTMLParser):
@@ -149,7 +153,8 @@ def main() -> int:
     required_terms = {
         "index.html": ["Collins Wewa", "WAKANDABOY100", "The Ultimate Cardio"],
         "about/index.html": ["Collins Wewa", "WAKANDABOY100"],
-        "merch/the-ultimate-cardio/index.html": ["The Ultimate Cardio", "WAKANDABOY100", "Fourthwall"],
+        "videos/index.html": ["Comedy skits", "I’m Habibi, Without the Oil Money", "Instagram Reel"],
+        "merch/the-ultimate-cardio/index.html": ["The Ultimate Cardio", "WAKANDABOY100"],
     }
     for rel, terms in required_terms.items():
         text = (ROOT / rel).read_text(encoding="utf-8")

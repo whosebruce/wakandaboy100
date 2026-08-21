@@ -23,7 +23,7 @@ A clean athletic/collegiate performer identity: **heather grey, ink black, paper
 2. “My Baby” is the flagship public proof point.
 3. Music/video/booking/merch each receive a real crawlable route.
 4. The Ultimate Cardio is positioned as `The Ultimate Cardio by WAKANDABOY100`, not generic fitness content.
-5. Merchandise status must be truthful: approved direction is not the same as available checkout.
+5. Merchandise status must be truthful: a preview is not the same as an available checkout.
 
 ## Motion and responsive rules
 
