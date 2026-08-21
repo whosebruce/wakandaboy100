@@ -1,16 +1,33 @@
 # WAKANDABOY100 Artist Portfolio
 
-Static GitHub Pages portfolio for **WAKANDABOY100** at <https://wakandaboy100.com>.
+Production static portfolio for **Collins Wewa / WAKANDABOY100** at <https://wakandaboy100.com>.
 
-## What is included
+## Route map
 
-- Mobile-first artist/creator landing page
-- Featured YouTube embed for “My Baby” with 300K+ proof point
-- Selected music video cards using public YouTube thumbnails
-- Streaming/social links for YouTube, Instagram, Facebook, X, TikTok, SoundCloud, Spotify, Apple Music, Audiomack, and Pandora
-- SEO metadata, Open Graph/Twitter card tags, JSON-LD structured data
-- `robots.txt`, `sitemap.xml`, favicon, and 1200×630 Open Graph image
+- `/` — official brand home
+- `/about/` — Collins Wewa biography/entity page
+- `/videos/` — music video and performance catalog
+- `/music/` — verified streaming profiles
+- `/booking/` — private-event inquiry guidance
+- `/merch/the-ultimate-cardio/` — approved Drop 001 direction and Fourthwall status
 
-## Easy future updates
+Public navigation uses real directory-index routes. There is no HashRouter; the only fragment is the accessibility skip link to `#main`.
 
-When WAKANDABOY100 sends approved photos, replace the temporary public thumbnail imagery in `index.html` and regenerate `og-image.png` if desired. The design intentionally keeps images swappable without changing the page structure.
+## Build and verification
+
+```bash
+python scripts/build_site.py
+python scripts/verify_site.py
+```
+
+The GitHub Pages workflow rebuilds and verifies the same source before uploading the deployment artifact. Verification fails on missing routes/assets, unresolved Design Component runtime markers, invalid JSON-LD, broken internal links, stale Shopify links, public fragment navigation, sitemap drift, or missing entity terms.
+
+## Brand and commerce state
+
+- Approved dancer mark: `assets/images/wakandaboy100-dancer.svg`
+- Approved shirt reference derivative: `assets/images/the-ultimate-cardio-shirt.webp`
+- Visual system: athletic heather grey, ink black, paper white; Anton + Barlow Condensed
+- Commerce platform: Fourthwall Free selected; public checkout remains offline until Wewa creates the owner account and invites Bruce Works as Manager
+- Do not publish placeholder products, invented prices, unsupported biography claims, or a dead store link
+
+See `DESIGN.md`, `DESIGN-DIRECTION.md`, and `OPEN_DESIGN.md` for the editable design contract.

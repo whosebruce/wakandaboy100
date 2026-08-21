@@ -1,11 +1,40 @@
-# Open Design direction — WAKANDABOY100
+# Design direction — WAKANDABOY100
 
-Open Design project: `WAKANDABOY100 artist portfolio visual direction` was created locally and used to frame the redesign direction.
+## Creative thesis
+
+A clean athletic/collegiate performer identity: **heather grey, ink black, paper white, oversized condensed typography, deliberate restraint, and movement supplied by the WAKANDABOY100 dancer mark.** This supersedes the former dark neon night-stage direction.
 
 ## Visual system
-- Mood: premium night-stage / energetic independent artist / Afro-futurist-inspired geometry without Marvel/IP references.
-- Colors: black `#09030f`, deep panel purple `#14091f`, electric violet `#8b2bff`, warm gold `#ffd166`, neon cyan `#19e6ff`, hot pink accent `#ff2e88`.
-- Type: condensed impact display for hero/section headlines, clean Inter UI for legibility.
-- Layout: mobile-first hero with proof badge, video-first content hierarchy, card-based selected works, sticky CTA bar.
-- Imagery: temporary public YouTube thumbnails treated as a performance collage; easy to swap once approved photos arrive.
-- Motion: subtle hover lifts and scroll-reveal-ready classes; reduced-motion safe.
+
+- **Primary background:** Heather Grey `#D5D5D9`
+- **Primary ink:** Ink Black `#15151A`
+- **Cards/reversed type:** Paper White `#F7F7F4`
+- **Dark panels:** Panel Charcoal `#1D1D23`
+- **Secondary text:** Stone `#56565E`
+- **Display type:** Anton, uppercase
+- **UI/labels:** Barlow Condensed 500/600/700
+- **Body:** Helvetica Neue / Helvetica / Arial
+- **Corners:** restrained 8px radii; no pill-heavy UI
+- **Texture:** subtle monochrome grain only
+
+## Content hierarchy
+
+1. WAKANDABOY100 and Collins Wewa are visibly connected above the fold.
+2. “My Baby” is the flagship public proof point.
+3. Music/video/booking/merch each receive a real crawlable route.
+4. The Ultimate Cardio is positioned as `The Ultimate Cardio by WAKANDABOY100`, not generic fitness content.
+5. Merchandise status must be truthful: approved direction is not the same as available checkout.
+
+## Motion and responsive rules
+
+- Marquee is decorative and disabled under reduced-motion preferences.
+- Navigation collapses to an accessible mobile menu.
+- No horizontal overflow at 390px.
+- Type scales with `clamp()` rather than fixed desktop dimensions.
+- External video thumbnails load below the fold with explicit dimensions.
+
+## Protected assets
+
+- Do not redraw or substitute the dancer mark.
+- Do not alter shirt wording, front/back composition, or garment direction without owner approval.
+- Production print art, a technical placement proof, and a storefront mockup are separate deliverables.
