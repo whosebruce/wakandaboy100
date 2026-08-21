@@ -35,7 +35,6 @@ button,input,textarea{font:inherit}
 .site-nav a[aria-current='page']{border-bottom:2px solid var(--ink)}
 
 .hero{padding:62px 0 44px;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
-.hero>*,.page-hero-grid>*,.shop-grid>*,.split>*,.merch-detail>*{min-width:0}
 .hero h1{font-size:clamp(4.3rem,9.5vw,7.6rem);line-height:.84}
 .hero .artist-line{margin:22px 0 0;font-family:var(--ui);font-weight:600;font-size:clamp(1rem,2.4vw,1.45rem);letter-spacing:.16em;text-transform:uppercase}
 .hero .lede{max-width:560px;margin:22px 0 0;color:#37373e;font-size:1.08rem;text-wrap:pretty}
@@ -142,6 +141,7 @@ button,input,textarea{font:inherit}
 .footer-base{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:20px;border-top:1px solid #2b2b31;color:#8a8a92;font-size:.84rem}
 
 @media (max-width:900px){
+  .hero>*,.page-hero-grid>*,.shop-grid>*,.split>*,.merch-detail>*{min-width:0}
   .nav-shell{min-height:64px}.menu-toggle{display:block}.site-nav{display:none;position:absolute;top:64px;left:0;right:0;padding:14px 24px 20px;background:var(--paper);border-bottom:1px solid var(--line);flex-wrap:wrap}.site-nav.is-open{display:flex}.site-nav a{flex:1 1 42%;border:1px solid var(--line);text-align:center}.site-nav .watch-link{margin:0}
   .hero,.page-hero-grid,.shop-grid,.split,.merch-detail{grid-template-columns:1fr}.hero{padding-top:48px}.hero-art{min-height:540px}.page-mark{justify-self:start;width:280px}.page-hero{padding-top:54px}.card-grid,.booking-grid{grid-template-columns:1fr 1fr}.platform-grid{grid-template-columns:1fr 1fr}.contact-panel{grid-template-columns:1fr}
 }
