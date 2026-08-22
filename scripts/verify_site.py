@@ -184,6 +184,16 @@ def main() -> int:
         if (ROOT / name).exists():
             fail(errors, f"prototype/runtime artifact must not ship: {name}")
 
+    style = (ROOT / "style.css").read_text(encoding="utf-8")
+    required_style_guards = {
+        "transparent navigation mark": ".brand-mark{display:grid;place-items:center;width:42px;height:42px;background:transparent;overflow:visible}",
+        "root footer-color fallback": "html{scroll-behavior:smooth;background:#0e0e12;overscroll-behavior-y:none}",
+        "body overscroll containment": "overflow-x:hidden;overscroll-behavior-y:none}",
+    }
+    for label, marker in required_style_guards.items():
+        if marker not in style:
+            fail(errors, f"style.css: missing {label}")
+
     if errors:
         print("SITE VERIFICATION FAILED")
         for error in errors:
