@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://wakandaboy100.com"
 OG = f"{SITE}/og-image.png?v=4"
+SHOP = "https://collins-wewa-shop.fourthwall.com/collections/the-ultimate-cardio"
 MEDIA = json.loads((ROOT / "content/media.json").read_text(encoding="utf-8"))
 
 SOCIALS = [
@@ -176,7 +177,7 @@ def media_cards(items: list[dict]) -> str:
     return "".join(cards)
 
 
-HOME = """
+HOME = f"""
 <section class="shell hero" aria-labelledby="home-title">
   <div>
     <p class="eyebrow">Independent artist · Performer · Creator</p>
@@ -219,7 +220,7 @@ HOME = """
 </div></section>
 <section class="shop-band"><div class="shell section shop-grid">
   <div class="shop-image"><img loading="lazy" src="/assets/images/the-ultimate-cardio-campaign.webp" alt="The Ultimate Cardio shirt — front and back" width="1600" height="1200"><span class="drop-badge">Drop 001</span></div>
-  <div class="shop-copy"><p class="eyebrow">WAKANDABOY100 merch</p><h2 class="display">The Ultimate<br>Cardio</h2><h3>Drop 001</h3><p>The first WAKANDABOY100 merchandise drop is taking shape. Full release details are coming soon.</p><span class="status-chip">Coming soon</span><div class="actions"><a class="button light" href="/merch/the-ultimate-cardio/">Preview the drop</a></div></div>
+  <div class="shop-copy"><p class="eyebrow">WAKANDABOY100 merch</p><h2 class="display">The Ultimate<br>Cardio</h2><h3>Drop 001</h3><p>Choose the contrast made for your colorway: black print or white print on a premium unisex supersoft T-shirt.</p><span class="status-chip">$27 · Two print treatments</span><div class="actions"><a class="button light" href="/merch/the-ultimate-cardio/">View the drop</a><a class="button light" href="{SHOP}" target="_blank" rel="noopener">Shop Drop 001</a></div></div>
 </div></section>
 """
 
@@ -259,9 +260,9 @@ BOOKING = """
 <div class="contact-panel"><div><h2>Request through Instagram</h2><p>Send the event date, city, venue, audience size, budget range, and requested performance type. A dedicated booking email can be connected after Wewa’s owner mailbox is verified.</p></div><a class="button primary" href="https://www.instagram.com/wakandaboy100/" target="_blank" rel="noopener">Message @wakandaboy100</a></div></section>
 """
 
-MERCH = """
-<section class="page-hero"><div class="shell page-hero-grid"><div><p class="eyebrow">WAKANDABOY100 merchandise</p><h1 class="display">The Ultimate<br>Cardio</h1><p class="lede">Drop 001 from WAKANDABOY100. Full release details are coming soon.</p></div><div class="page-mark"><img src="/assets/images/wakandaboy100-dancer.svg" alt="WAKANDABOY100 dancer mark" width="300" height="330"></div></div></section>
-<section class="shell section merch-detail"><div class="shop-image"><img src="/assets/images/the-ultimate-cardio-campaign.webp" alt="The Ultimate Cardio shirt — front and back" width="1600" height="1200"><span class="drop-badge">Drop 001</span></div><div class="prose"><p class="eyebrow">WAKANDABOY100 merch</p><h2>The Ultimate<br>Cardio</h2><p>The first WAKANDABOY100 merchandise drop is taking shape. Launch details and availability will be announced here.</p><div class="actions"><span class="button" aria-disabled="true">Coming soon</span></div></div></section>
+MERCH = f"""
+<section class="page-hero"><div class="shell page-hero-grid"><div><p class="eyebrow">WAKANDABOY100 merchandise</p><h1 class="display">The Ultimate<br>Cardio</h1><p class="lede">Drop 001 from WAKANDABOY100. Choose the contrast made for your colorway.</p></div><div class="page-mark"><img src="/assets/images/wakandaboy100-dancer.svg" alt="WAKANDABOY100 dancer mark" width="300" height="330"></div></div></section>
+<section class="shell section merch-detail"><div class="shop-image"><img src="/assets/images/the-ultimate-cardio-campaign.webp" alt="The Ultimate Cardio shirt — front and back" width="1600" height="1200"><span class="drop-badge">Drop 001</span></div><div class="prose"><p class="eyebrow">WAKANDABOY100 merch</p><h2>The Ultimate<br>Cardio</h2><p>A compact collegiate chest mark meets a bold back statement on a premium unisex supersoft T-shirt. Black print is offered on Asphalt, Red, Yellow, and Solid White Blend. White print is offered on Black, Charity Pink, and True Royal. Availability varies by size.</p><p><strong>$27</strong> · Printed on demand</p><div class="actions"><a class="button primary" href="{SHOP}" target="_blank" rel="noopener">Shop the drop</a></div></div></section>
 <section class="shell section compact" aria-labelledby="drop-gallery-title"><div class="section-head"><div><p class="eyebrow">Drop 001 preview</p><h2 class="display" id="drop-gallery-title">Front / Back</h2></div></div><div class="merch-gallery"><figure><img loading="lazy" src="/assets/images/the-ultimate-cardio-front.webp" alt="Front view of The Ultimate Cardio shirt" width="1200" height="1200"><figcaption>Front</figcaption></figure><figure><img loading="lazy" src="/assets/images/the-ultimate-cardio-back.webp" alt="Back view of The Ultimate Cardio shirt" width="1200" height="1200"><figcaption>Back</figcaption></figure></div></section>
 """
 
@@ -271,7 +272,7 @@ PAGES = [
     ("videos/index.html", dict(title="WAKANDABOY100 Videos | Collins Wewa", description="Watch WAKANDABOY100 music videos and performance work by Collins Wewa, including My Baby, Heart Broken, Pull the Plug, and Dance With Me.", path="/videos/", active="videos", body=VIDEOS, page_type="CollectionPage")),
     ("music/index.html", dict(title="WAKANDABOY100 Music | Stream Collins Wewa", description="Stream WAKANDABOY100 music by Collins Wewa on Spotify, Apple Music, SoundCloud, Audiomack, Pandora, and YouTube.", path="/music/", active="music", body=MUSIC, page_type="CollectionPage")),
     ("booking/index.html", dict(title="Book WAKANDABOY100 | Collins Wewa Performances", description="Request Collins Wewa—WAKANDABOY100—for birthdays, parties, private events, appearances, and performance opportunities.", path="/booking/", active="booking", body=BOOKING, page_type="ContactPage")),
-    ("merch/the-ultimate-cardio/index.html", dict(title="The Ultimate Cardio by WAKANDABOY100 | Merch", description="Preview The Ultimate Cardio, Drop 001 from Collins Wewa and WAKANDABOY100. Launch details and availability are coming soon.", path="/merch/the-ultimate-cardio/", active="merch", body=MERCH, page_type="CollectionPage")),
+    ("merch/the-ultimate-cardio/index.html", dict(title="The Ultimate Cardio by WAKANDABOY100 | Merch", description="Shop The Ultimate Cardio T-shirt, Drop 001 from Collins Wewa and WAKANDABOY100, in black-print and white-print colorways for $27.", path="/merch/the-ultimate-cardio/", active="merch", body=MERCH, page_type="CollectionPage", schema_extra={"significantLink": SHOP})),
 ]
 
 

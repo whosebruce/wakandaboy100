@@ -9,7 +9,7 @@ Production static portfolio for **Collins Wewa / WAKANDABOY100** at <https://wak
 - `/videos/` — music video and performance catalog
 - `/music/` — verified streaming profiles
 - `/booking/` — private-event inquiry guidance
-- `/merch/the-ultimate-cardio/` — public Drop 001 preview and coming-soon page
+- `/merch/the-ultimate-cardio/` — public Drop 001 detail page and official shop handoff
 
 Public navigation uses real directory-index routes. There is no HashRouter; the only fragment is the accessibility skip link to `#main`.
 
@@ -42,7 +42,8 @@ The helper downloads the platform’s public cover, creates a stable landscape w
 - Approved dancer mark: `assets/images/wakandaboy100-dancer.svg`
 - Approved shirt reference derivative: `assets/images/the-ultimate-cardio-shirt.webp`
 - Visual system: athletic heather grey, ink black, paper white; Anton + Barlow Condensed
-- Public merchandise copy is limited to launch-ready statements; checkout remains offline until an official release is announced
-- Do not publish placeholder products, invented prices, unsupported biography claims, or a dead store link
+- Official shop collection: `https://collins-wewa-shop.fourthwall.com/collections/the-ultimate-cardio`
+- Launch price: $27 for both hidden contrast treatments; the website launch patch must not deploy before Fourthwall products and collection are public
+- Do not publish placeholder products, invented prices, unsupported biography claims, or any Fourthwall destination other than the allowlisted collection URL
 
 See `DESIGN.md`, `DESIGN-DIRECTION.md`, and `OPEN_DESIGN.md` for the editable design contract.

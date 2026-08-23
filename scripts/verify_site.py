@@ -11,6 +11,7 @@ from urllib.parse import urlparse
 from xml.etree import ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
+OFFICIAL_SHOP = "https://collins-wewa-shop.fourthwall.com/collections/the-ultimate-cardio"
 EXPECTED = {
     "index.html": "https://wakandaboy100.com/",
     "about/index.html": "https://wakandaboy100.com/about/",
@@ -21,7 +22,7 @@ EXPECTED = {
 }
 FORBIDDEN = (
     "{{", "<sc-", "<x-dc", "support.js", "data-dc-", "shopify.com", "shop.wakandaboy100.com",
-    "Fourthwall", "Bella+Canvas", "DTG", "vendor proof", "owner invite", "approved direction",
+    "DTG", "vendor proof", "owner invite", "approved direction",
     "garment direction", "Front quiet", "Store status:",
 )
 
@@ -145,6 +146,8 @@ def main() -> int:
                 all_internal_routes.add(href)
                 if not target.exists():
                     fail(errors, f"{rel}: broken internal link {href} -> {target.relative_to(ROOT)}")
+            if "fourthwall.com" in href and href != OFFICIAL_SHOP:
+                fail(errors, f"{rel}: unapproved Fourthwall destination {href}")
         for src in parser.assets:
             target = local_target(src, page)
             if target is not None and not target.exists():
@@ -161,6 +164,15 @@ def main() -> int:
         for term in terms:
             if term.lower() not in text.lower():
                 fail(errors, f"{rel}: missing entity term {term}")
+
+    expected_shop_occurrences = {
+        "index.html": 1,
+        "merch/the-ultimate-cardio/index.html": 2,  # CTA plus JSON-LD significantLink
+    }
+    for rel, expected_count in expected_shop_occurrences.items():
+        text = (ROOT / rel).read_text(encoding="utf-8")
+        if text.count(OFFICIAL_SHOP) != expected_count:
+            fail(errors, f"{rel}: expected {expected_count} official shop URL occurrence(s)")
 
     sitemap = ROOT / "sitemap.xml"
     try:
@@ -202,7 +214,7 @@ def main() -> int:
 
     print("SITE VERIFICATION PASSED")
     print(f"pages={len(EXPECTED)} canonicals={len(found_canonicals)} internal_routes={len(all_internal_routes)}")
-    print("prototype_markers=0 forbidden_shopify_links=0 public_fragment_routes=0")
+    print("prototype_markers=0 forbidden_shopify_links=0 public_fragment_routes=0 official_shop_links=2")
     return 0
 
 
