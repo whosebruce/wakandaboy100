@@ -90,6 +90,7 @@ button,input,textarea{font:inherit}
 .shop-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:30px;align-items:center}
 .shop-image{position:relative;overflow:hidden;border-radius:8px;background:#eee}
 .shop-image img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+.shop-hero-image img{aspect-ratio:16/9;object-position:center}
 .drop-badge{position:absolute;left:15px;top:15px;background:white;color:var(--ink);padding:6px 11px;font-family:var(--ui);font-size:.76rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
 .shop-copy h2{font-size:clamp(3.4rem,7vw,5.4rem)}
 .shop-copy h3{margin:28px 0 0;font-family:var(--display);font-size:2.4rem;font-weight:400;text-transform:uppercase;line-height:.96}
@@ -104,6 +105,8 @@ button,input,textarea{font:inherit}
 .page-hero .lede{max-width:700px;margin:22px 0 0;color:#37373e;font-size:1.12rem}
 .page-mark{justify-self:end;width:min(340px,100%);aspect-ratio:1;background:radial-gradient(circle at 50% 20%,#414149,var(--ink));display:grid;place-items:center;border-radius:8px;overflow:hidden}
 .page-mark img{height:90%;width:auto}
+.page-mark.merch-page-mark{aspect-ratio:4/5;background:var(--ink)}
+.page-mark.merch-page-mark img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:40px}
 .prose h2{margin:0 0 16px;font-family:var(--display);font-size:2.7rem;font-weight:400;text-transform:uppercase;line-height:1}
 .prose h3{margin:28px 0 8px;font-family:var(--ui);font-size:1.35rem;letter-spacing:.06em;text-transform:uppercase}
@@ -128,6 +131,17 @@ button,input,textarea{font:inherit}
 .merch-gallery figure{margin:0;overflow:hidden;border:1px solid var(--line);border-radius:8px;background:var(--white)}
 .merch-gallery img{width:100%;height:auto;aspect-ratio:1;object-fit:cover}
 .merch-gallery figcaption{padding:12px 16px;border-top:1px solid var(--line);font-family:var(--ui);font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.lifestyle-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.lifestyle-card{margin:0;overflow:hidden;border:1px solid var(--line);border-radius:8px;background:var(--white)}
+.lifestyle-card img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 42%;background:#c8c8cd}
+.lifestyle-card:nth-child(1) img{object-position:56% 42%}
+.lifestyle-card:nth-child(2) img{object-position:76% 42%}
+.lifestyle-card:nth-child(3) img{object-position:76% 42%}
+.lifestyle-card:nth-child(4) img{object-position:52% 42%}
+.lifestyle-card:nth-child(5) img{object-position:62% 38%}
+.lifestyle-card figcaption{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:12px 16px;border-top:1px solid var(--line);font-family:var(--ui);text-transform:uppercase}
+.lifestyle-card figcaption strong{font-size:.96rem;letter-spacing:.13em}
+.lifestyle-card figcaption span{color:var(--muted);font-size:.75rem;font-weight:600;letter-spacing:.11em;text-align:right}
 .merch-specs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0}
 .merch-specs div{border-top:1px solid var(--line);padding-top:12px}
 .merch-specs strong{display:block;font-family:var(--ui);font-size:.8rem;letter-spacing:.16em;text-transform:uppercase}
@@ -147,9 +161,9 @@ button,input,textarea{font:inherit}
 @media (max-width:900px){
   .hero>*,.page-hero-grid>*,.shop-grid>*,.split>*,.merch-detail>*{min-width:0}
   .nav-shell{min-height:64px}.menu-toggle{display:block}.site-nav{display:none;position:absolute;top:64px;left:0;right:0;padding:14px 24px 20px;background:var(--paper);border-bottom:1px solid var(--line);flex-wrap:wrap}.site-nav.is-open{display:flex}.site-nav a{flex:1 1 42%;border:1px solid var(--line);text-align:center}.site-nav .watch-link{margin:0}
-  .hero,.page-hero-grid,.shop-grid,.split,.merch-detail{grid-template-columns:1fr}.hero{padding-top:48px}.hero-art{min-height:540px}.page-mark{justify-self:start;width:280px}.page-hero{padding-top:54px}.card-grid,.booking-grid{grid-template-columns:1fr 1fr}.platform-grid{grid-template-columns:1fr 1fr}.contact-panel{grid-template-columns:1fr}
+  .hero,.page-hero-grid,.shop-grid,.split,.merch-detail{grid-template-columns:1fr}.hero{padding-top:48px}.hero-art{min-height:540px}.page-mark{justify-self:start;width:280px}.page-hero{padding-top:54px}.card-grid,.booking-grid{grid-template-columns:1fr 1fr}.platform-grid,.lifestyle-gallery{grid-template-columns:1fr 1fr}.contact-panel{grid-template-columns:1fr}
 }
 @media (max-width:620px){
-  .shell,.nav-shell{width:min(100% - 28px,var(--max))}.brand-name{font-size:1.03rem;letter-spacing:.1em}.hero{gap:32px;padding-top:38px}.hero h1{font-size:clamp(3.2rem,16.5vw,4rem);line-height:.88}.hero h1 .outline{display:block;line-height:.95}.hero .eyebrow{font-size:.76rem;letter-spacing:.2em;overflow-wrap:anywhere}.hero .artist-line{font-size:.94rem;letter-spacing:.11em}.hero .lede{font-size:1rem;overflow-wrap:anywhere}.hero-art{min-height:460px}.hero-art .ghost-number{font-size:17rem}.stats{gap:10px}.stats div{min-width:0}.stats dt{font-size:1.9rem}.stats dd{font-size:.66rem;letter-spacing:.09em;overflow-wrap:anywhere}.actions{display:grid;grid-template-columns:1fr}.button{width:100%}.section{padding:60px 0}.section-head h2{font-size:2.9rem}.card-grid,.platform-grid,.booking-grid{grid-template-columns:1fr}.feature-meta{align-items:flex-start}.video-poster{aspect-ratio:16/10}.play-badge{width:62px;height:62px;font-size:.8rem}.shop-copy h2{font-size:3.25rem}.page-hero h1{font-size:3.9rem}.page-mark{width:220px}.merch-specs{grid-template-columns:1fr}.footer-art{right:-80px}.footer-base{flex-direction:column}.marquee-track{font-size:1.35rem}.contact-panel{padding:22px}
+  .shell,.nav-shell{width:min(100% - 28px,var(--max))}.brand-name{font-size:1.03rem;letter-spacing:.1em}.hero{gap:32px;padding-top:38px}.hero h1{font-size:clamp(3.2rem,16.5vw,4rem);line-height:.88}.hero h1 .outline{display:block;line-height:.95}.hero .eyebrow{font-size:.76rem;letter-spacing:.2em;overflow-wrap:anywhere}.hero .artist-line{font-size:.94rem;letter-spacing:.11em}.hero .lede{font-size:1rem;overflow-wrap:anywhere}.hero-art{min-height:460px}.hero-art .ghost-number{font-size:17rem}.stats{gap:10px}.stats div{min-width:0}.stats dt{font-size:1.9rem}.stats dd{font-size:.66rem;letter-spacing:.09em;overflow-wrap:anywhere}.actions{display:grid;grid-template-columns:1fr}.button{width:100%}.section{padding:60px 0}.section-head h2{font-size:2.9rem}.card-grid,.platform-grid,.booking-grid,.lifestyle-gallery{grid-template-columns:1fr}.feature-meta{align-items:flex-start}.video-poster{aspect-ratio:16/10}.play-badge{width:62px;height:62px;font-size:.8rem}.shop-copy h2{font-size:3.25rem}.page-hero h1{font-size:3.9rem}.page-mark{width:220px}.merch-specs{grid-template-columns:1fr}.footer-art{right:-80px}.footer-base{flex-direction:column}.marquee-track{font-size:1.35rem}.contact-panel{padding:22px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.marquee-track{animation:none}.button,.video-poster img{transition:none}}

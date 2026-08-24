@@ -167,12 +167,32 @@ def main() -> int:
 
     expected_shop_occurrences = {
         "index.html": 1,
-        "merch/the-ultimate-cardio/index.html": 2,  # CTA plus JSON-LD significantLink
+        "merch/the-ultimate-cardio/index.html": 3,  # Two CTAs plus JSON-LD significantLink
     }
     for rel, expected_count in expected_shop_occurrences.items():
         text = (ROOT / rel).read_text(encoding="utf-8")
         if text.count(OFFICIAL_SHOP) != expected_count:
             fail(errors, f"{rel}: expected {expected_count} official shop URL occurrence(s)")
+
+    home = (ROOT / "index.html").read_text(encoding="utf-8")
+    merch_first = home.find('class="shop-band shop-band-home"')
+    artist_intro = home.find('class="shell hero"')
+    selected_work = home.find('id="selected-work-title"')
+    if min(merch_first, artist_intro, selected_work) < 0 or not merch_first < artist_intro < selected_work:
+        fail(errors, "index.html: merch-first section order regressed")
+
+    merch = (ROOT / "merch/the-ultimate-cardio/index.html").read_text(encoding="utf-8")
+    required_merch_images = (
+        "ultimate-cardio-yellow-road-close.webp",
+        "ultimate-cardio-yellow-road-run.webp",
+        "ultimate-cardio-black-road-run.webp",
+        "ultimate-cardio-red-road-run.webp",
+        "ultimate-cardio-red-trail-run.webp",
+        "ultimate-cardio-pink-track.webp",
+    )
+    for image in required_merch_images:
+        if image not in merch:
+            fail(errors, f"merch page: missing curated lifestyle image {image}")
 
     sitemap = ROOT / "sitemap.xml"
     try:
@@ -214,7 +234,7 @@ def main() -> int:
 
     print("SITE VERIFICATION PASSED")
     print(f"pages={len(EXPECTED)} canonicals={len(found_canonicals)} internal_routes={len(all_internal_routes)}")
-    print("prototype_markers=0 forbidden_shopify_links=0 public_fragment_routes=0 official_shop_links=2")
+    print("prototype_markers=0 forbidden_shopify_links=0 public_fragment_routes=0 official_shop_url_occurrences=4")
     return 0
 
 

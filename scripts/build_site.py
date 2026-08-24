@@ -87,7 +87,7 @@ def footer() -> str:
 <script src="/script.js" defer></script>"""
 
 
-def schema_for(path: str, page_type: str, title: str, description: str, extra: dict | None = None) -> dict:
+def schema_for(path: str, page_type: str, title: str, description: str, image: str = OG, extra: dict | None = None) -> dict:
     page_id = f"{SITE}{path}#webpage"
     website = {
         "@type": "WebSite",
@@ -105,16 +105,16 @@ def schema_for(path: str, page_type: str, title: str, description: str, extra: d
         "description": description,
         "isPartOf": {"@id": website["@id"]},
         "about": {"@id": PERSON["@id"]},
-        "primaryImageOfPage": {"@type": "ImageObject", "url": OG},
+        "primaryImageOfPage": {"@type": "ImageObject", "url": image},
     }
     if extra:
         page.update(extra)
     return {"@context": "https://schema.org", "@graph": [website, PERSON, page]}
 
 
-def document(*, title: str, description: str, path: str, active: str, body: str, page_type: str = "WebPage", schema_extra: dict | None = None) -> str:
+def document(*, title: str, description: str, path: str, active: str, body: str, page_type: str = "WebPage", schema_extra: dict | None = None, og_image: str = OG, og_alt: str = "WAKANDABOY100 — Collins Wewa, independent artist and performer") -> str:
     canonical = f"{SITE}{path}"
-    schema = schema_for(path, page_type, title, description, schema_extra)
+    schema = schema_for(path, page_type, title, description, og_image, schema_extra)
     safe_title = html.escape(title, quote=True)
     safe_desc = html.escape(description, quote=True)
     page = f"""<!doctype html>
@@ -137,14 +137,14 @@ def document(*, title: str, description: str, path: str, active: str, body: str,
   <meta property="og:url" content="{canonical}">
   <meta property="og:title" content="{safe_title}">
   <meta property="og:description" content="{safe_desc}">
-  <meta property="og:image" content="{OG}">
+  <meta property="og:image" content="{og_image}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="WAKANDABOY100 — Collins Wewa, independent artist and performer">
+  <meta property="og:image:alt" content="{html.escape(og_alt, quote=True)}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{safe_title}">
   <meta name="twitter:description" content="{safe_desc}">
-  <meta name="twitter:image" content="{OG}">
+  <meta name="twitter:image" content="{og_image}">
   <script type="application/ld+json">{json.dumps(schema, separators=(',', ':'))}</script>
 </head>
 <body>
@@ -178,6 +178,10 @@ def media_cards(items: list[dict]) -> str:
 
 
 HOME = f"""
+<section class="shop-band shop-band-home"><div class="shell section shop-grid">
+  <div class="shop-image shop-hero-image"><img src="/assets/images/ultimate-cardio-yellow-road-hero.webp" alt="Runner wearing a yellow The Ultimate Cardio shirt on a sunlit road" width="2200" height="1228" fetchpriority="high"><span class="drop-badge">Drop 001</span></div>
+  <div class="shop-copy"><p class="eyebrow">The fitness drop · Now live</p><h2 class="display">The Ultimate<br>Cardio</h2><h3>Built to move</h3><p>Choose the contrast made for your colorway: black print or white print on a premium unisex supersoft T-shirt.</p><span class="status-chip">$27 · Two print treatments</span><div class="actions"><a class="button light" href="/merch/the-ultimate-cardio/">View the full collection</a><a class="button light" href="{SHOP}" target="_blank" rel="noopener">Shop Drop 001</a></div></div>
+</div></section>
 <section class="shell hero" aria-labelledby="home-title">
   <div>
     <p class="eyebrow">Independent artist · Performer · Creator</p>
@@ -218,10 +222,6 @@ HOME = f"""
   <a class="platform-card" href="https://music.apple.com/us/artist/wakandaboy100/1559091732" target="_blank" rel="noopener"><span>Apple Music</span><span>→</span></a>
   <a class="platform-card" href="https://soundcloud.com/user-684213263" target="_blank" rel="noopener"><span>SoundCloud</span><span>→</span></a>
 </div></section>
-<section class="shop-band"><div class="shell section shop-grid">
-  <div class="shop-image"><img loading="lazy" src="/assets/images/the-ultimate-cardio-campaign.webp" alt="The Ultimate Cardio shirt — front and back" width="1600" height="1200"><span class="drop-badge">Drop 001</span></div>
-  <div class="shop-copy"><p class="eyebrow">WAKANDABOY100 merch</p><h2 class="display">The Ultimate<br>Cardio</h2><h3>Drop 001</h3><p>Choose the contrast made for your colorway: black print or white print on a premium unisex supersoft T-shirt.</p><span class="status-chip">$27 · Two print treatments</span><div class="actions"><a class="button light" href="/merch/the-ultimate-cardio/">View the drop</a><a class="button light" href="{SHOP}" target="_blank" rel="noopener">Shop Drop 001</a></div></div>
-</div></section>
 """
 
 ABOUT = """
@@ -261,9 +261,16 @@ BOOKING = """
 """
 
 MERCH = f"""
-<section class="page-hero"><div class="shell page-hero-grid"><div><p class="eyebrow">WAKANDABOY100 merchandise</p><h1 class="display">The Ultimate<br>Cardio</h1><p class="lede">Drop 001 from WAKANDABOY100. Choose the contrast made for your colorway.</p></div><div class="page-mark"><img src="/assets/images/wakandaboy100-dancer.svg" alt="WAKANDABOY100 dancer mark" width="300" height="330"></div></div></section>
+<section class="page-hero"><div class="shell page-hero-grid"><div><p class="eyebrow">WAKANDABOY100 merchandise</p><h1 class="display">The Ultimate<br>Cardio</h1><p class="lede">Drop 001 from WAKANDABOY100. Choose the contrast made for your colorway.</p></div><div class="page-mark merch-page-mark"><img src="/assets/images/ultimate-cardio-yellow-road-close.webp" alt="Runner wearing a yellow The Ultimate Cardio shirt on a sunlit road" width="1600" height="1986" fetchpriority="high"></div></div></section>
 <section class="shell section merch-detail"><div class="shop-image"><img src="/assets/images/the-ultimate-cardio-campaign.webp" alt="The Ultimate Cardio shirt — front and back" width="1600" height="1200"><span class="drop-badge">Drop 001</span></div><div class="prose"><p class="eyebrow">WAKANDABOY100 merch</p><h2>The Ultimate<br>Cardio</h2><p>A compact collegiate chest mark meets a bold back statement on a premium unisex supersoft T-shirt. Black print is offered on Asphalt, Red, Yellow, and Solid White Blend. White print is offered on Black, Charity Pink, and True Royal. Availability varies by size.</p><p><strong>$27</strong> · Printed on demand</p><div class="actions"><a class="button primary" href="{SHOP}" target="_blank" rel="noopener">Shop the drop</a></div></div></section>
 <section class="shell section compact" aria-labelledby="drop-gallery-title"><div class="section-head"><div><p class="eyebrow">Drop 001 preview</p><h2 class="display" id="drop-gallery-title">Front / Back</h2></div></div><div class="merch-gallery"><figure><img loading="lazy" src="/assets/images/the-ultimate-cardio-front.webp" alt="Front view of The Ultimate Cardio shirt" width="1200" height="1200"><figcaption>Front</figcaption></figure><figure><img loading="lazy" src="/assets/images/the-ultimate-cardio-back.webp" alt="Back view of The Ultimate Cardio shirt" width="1200" height="1200"><figcaption>Back</figcaption></figure></div></section>
+<section class="shell section compact" aria-labelledby="lifestyle-gallery-title"><div class="section-head"><div><p class="eyebrow">Made to move</p><h2 class="display" id="lifestyle-gallery-title">Road / Trail / Track</h2><p class="intro">The same compact chest mark across the Drop 001 color range.</p></div><a class="button" href="{SHOP}" target="_blank" rel="noopener">Shop the collection →</a></div><div class="lifestyle-gallery">
+  <figure class="lifestyle-card"><img loading="lazy" src="/assets/images/ultimate-cardio-yellow-road-run.webp" alt="Runner in a yellow The Ultimate Cardio shirt on a sunlit road" width="1600" height="1986"><figcaption><strong>Yellow</strong><span>Road training</span></figcaption></figure>
+  <figure class="lifestyle-card"><img loading="lazy" src="/assets/images/ultimate-cardio-black-road-run.webp" alt="Runner in a black The Ultimate Cardio shirt at sunset" width="1800" height="1005"><figcaption><strong>Black</strong><span>Sunset miles</span></figcaption></figure>
+  <figure class="lifestyle-card"><img loading="lazy" src="/assets/images/ultimate-cardio-red-road-run.webp" alt="Runner in a red The Ultimate Cardio shirt on an open road" width="1800" height="1005"><figcaption><strong>Red</strong><span>Road training</span></figcaption></figure>
+  <figure class="lifestyle-card"><img loading="lazy" src="/assets/images/ultimate-cardio-red-trail-run.webp" alt="Runner in a red The Ultimate Cardio shirt on a wooded trail" width="1600" height="1986"><figcaption><strong>Red</strong><span>Trail miles</span></figcaption></figure>
+  <figure class="lifestyle-card"><img loading="lazy" src="/assets/images/ultimate-cardio-pink-track.webp" alt="Runner in a pink The Ultimate Cardio shirt after a track workout" width="1800" height="1208"><figcaption><strong>Charity Pink</strong><span>Track cooldown</span></figcaption></figure>
+</div></section>
 """
 
 PAGES = [
@@ -272,7 +279,7 @@ PAGES = [
     ("videos/index.html", dict(title="WAKANDABOY100 Videos | Collins Wewa", description="Watch WAKANDABOY100 music videos and performance work by Collins Wewa, including My Baby, Heart Broken, Pull the Plug, and Dance With Me.", path="/videos/", active="videos", body=VIDEOS, page_type="CollectionPage")),
     ("music/index.html", dict(title="WAKANDABOY100 Music | Stream Collins Wewa", description="Stream WAKANDABOY100 music by Collins Wewa on Spotify, Apple Music, SoundCloud, Audiomack, Pandora, and YouTube.", path="/music/", active="music", body=MUSIC, page_type="CollectionPage")),
     ("booking/index.html", dict(title="Book WAKANDABOY100 | Collins Wewa Performances", description="Request Collins Wewa—WAKANDABOY100—for birthdays, parties, private events, appearances, and performance opportunities.", path="/booking/", active="booking", body=BOOKING, page_type="ContactPage")),
-    ("merch/the-ultimate-cardio/index.html", dict(title="The Ultimate Cardio by WAKANDABOY100 | Merch", description="Shop The Ultimate Cardio T-shirt, Drop 001 from Collins Wewa and WAKANDABOY100, in black-print and white-print colorways for $27.", path="/merch/the-ultimate-cardio/", active="merch", body=MERCH, page_type="CollectionPage", schema_extra={"significantLink": SHOP})),
+    ("merch/the-ultimate-cardio/index.html", dict(title="The Ultimate Cardio by WAKANDABOY100 | Merch", description="Shop The Ultimate Cardio T-shirt, Drop 001 from Collins Wewa and WAKANDABOY100, in black-print and white-print colorways for $27.", path="/merch/the-ultimate-cardio/", active="merch", body=MERCH, page_type="CollectionPage", schema_extra={"significantLink": SHOP}, og_image=f"{SITE}/assets/images/ultimate-cardio-og.jpg?v=1", og_alt="Runner wearing a yellow The Ultimate Cardio shirt on a sunlit road")),
 ]
 
 
