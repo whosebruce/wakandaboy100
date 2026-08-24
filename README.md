@@ -43,7 +43,7 @@ The helper downloads the platform’s public cover, creates a stable landscape w
 - Approved shirt reference derivative: `assets/images/the-ultimate-cardio-shirt.webp`
 - Visual system: athletic heather grey, ink black, paper white; Anton + Barlow Condensed
 - Official shop collection: `https://collins-wewa-shop.fourthwall.com/collections/the-ultimate-cardio`
-- Launch price: $27 for both hidden contrast treatments; the website launch patch must not deploy before Fourthwall products and collection are public
+- Current price: $38 for both print treatments, verified against the live Fourthwall collection; website copy and metadata must match Fourthwall before deployment
 - Do not publish placeholder products, invented prices, unsupported biography claims, or any Fourthwall destination other than the allowlisted collection URL
 
 See `DESIGN.md`, `DESIGN-DIRECTION.md`, and `OPEN_DESIGN.md` for the editable design contract.

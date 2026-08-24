@@ -165,6 +165,14 @@ def main() -> int:
             if term.lower() not in text.lower():
                 fail(errors, f"{rel}: missing entity term {term}")
 
+    price_surfaces = ("index.html", "merch/the-ultimate-cardio/index.html")
+    for rel in price_surfaces:
+        text = (ROOT / rel).read_text(encoding="utf-8")
+        if "$27" in text:
+            fail(errors, f"{rel}: stale $27 price remains")
+        if "$38" not in text:
+            fail(errors, f"{rel}: current $38 price missing")
+
     expected_shop_occurrences = {
         "index.html": 1,
         "merch/the-ultimate-cardio/index.html": 3,  # Two CTAs plus JSON-LD significantLink
