@@ -9,7 +9,7 @@ Production static portfolio for **Collins Wewa / WAKANDABOY100** at <https://wak
 - `/videos/` — music video and performance catalog
 - `/music/` — verified streaming profiles
 - `/booking/` — private-event inquiry guidance
-- `/merch/the-ultimate-cardio/` — public Drop 001 detail page and official shop handoff
+- `/merch/the-ultimate-cardio/` — full nine-style collection page and official shop handoff
 
 Public navigation uses real directory-index routes. There is no HashRouter; the only fragment is the accessibility skip link to `#main`.
 
@@ -42,8 +42,10 @@ The helper downloads the platform’s public cover, creates a stable landscape w
 - Approved dancer mark: `assets/images/wakandaboy100-dancer.svg`
 - Approved shirt reference derivative: `assets/images/the-ultimate-cardio-shirt.webp`
 - Visual system: athletic heather grey, ink black, paper white; Anton + Barlow Condensed
-- Official shop collection: `https://collins-wewa-shop.fourthwall.com/collections/the-ultimate-cardio`
-- Current price: $38 for both print treatments, verified against the live Fourthwall collection; website copy and metadata must match Fourthwall before deployment
-- Do not publish placeholder products, invented prices, unsupported biography claims, or any Fourthwall destination other than the allowlisted collection URL
+- Official shop collection: `https://shop.wakandaboy100.com/collections/all`
+- Live collection source: `content/merch.json` contains the nine approved product URLs, names, prices, color lists, and official product-render assets.
+- Current starting prices range from $29 to $62, with size-tier increases on applicable products; website copy and metadata must match Fourthwall before deployment.
+- Campaign/lifestyle images under `assets/images/ultimate-cardio-v2/` are editorial presentation assets. Product cards use official storefront renders so shoppers can distinguish campaign imagery from the actual products.
+- Do not publish placeholder products, invented prices, unsupported biography claims, stale `collins-wewa-shop.fourthwall.com` destinations, or shop links outside the allowlist in `content/merch.json`.
 
 See `DESIGN.md`, `DESIGN-DIRECTION.md`, and `OPEN_DESIGN.md` for the editable design contract.

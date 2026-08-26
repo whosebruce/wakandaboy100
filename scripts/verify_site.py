@@ -11,7 +11,9 @@ from urllib.parse import urlparse
 from xml.etree import ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-OFFICIAL_SHOP = "https://collins-wewa-shop.fourthwall.com/collections/the-ultimate-cardio"
+MERCH_DATA = json.loads((ROOT / "content/merch.json").read_text(encoding="utf-8"))
+OFFICIAL_SHOP = MERCH_DATA["shop_url"]
+APPROVED_SHOP_LINKS = {OFFICIAL_SHOP, *(item["url"] for item in MERCH_DATA["products"])}
 EXPECTED = {
     "index.html": "https://wakandaboy100.com/",
     "about/index.html": "https://wakandaboy100.com/about/",
@@ -21,9 +23,9 @@ EXPECTED = {
     "merch/the-ultimate-cardio/index.html": "https://wakandaboy100.com/merch/the-ultimate-cardio/",
 }
 FORBIDDEN = (
-    "{{", "<sc-", "<x-dc", "support.js", "data-dc-", "shopify.com", "shop.wakandaboy100.com",
+    "{{", "<sc-", "<x-dc", "support.js", "data-dc-", "shopify.com",
     "DTG", "vendor proof", "owner invite", "approved direction",
-    "garment direction", "Front quiet", "Store status:",
+    "garment direction", "Front quiet", "Store status:", "Drop 001",
 )
 
 
@@ -146,8 +148,11 @@ def main() -> int:
                 all_internal_routes.add(href)
                 if not target.exists():
                     fail(errors, f"{rel}: broken internal link {href} -> {target.relative_to(ROOT)}")
-            if "fourthwall.com" in href and href != OFFICIAL_SHOP:
-                fail(errors, f"{rel}: unapproved Fourthwall destination {href}")
+            parsed_href = urlparse(href)
+            if parsed_href.netloc in {"collins-wewa-shop.fourthwall.com", "www.collins-wewa-shop.fourthwall.com"}:
+                fail(errors, f"{rel}: stale Fourthwall host {href}")
+            if parsed_href.netloc == "shop.wakandaboy100.com" and href not in APPROVED_SHOP_LINKS:
+                fail(errors, f"{rel}: unapproved shop destination {href}")
         for src in parser.assets:
             target = local_target(src, page)
             if target is not None and not target.exists():
@@ -170,12 +175,19 @@ def main() -> int:
         text = (ROOT / rel).read_text(encoding="utf-8")
         if "$27" in text:
             fail(errors, f"{rel}: stale $27 price remains")
-        if "$38" not in text:
-            fail(errors, f"{rel}: current $38 price missing")
+        if "$29" not in text:
+            fail(errors, f"{rel}: current starting price $29 missing")
+    merch_text = (ROOT / "merch/the-ultimate-cardio/index.html").read_text(encoding="utf-8")
+    for price in {item["price"] for item in MERCH_DATA["products"]}:
+        if price not in merch_text:
+            fail(errors, f"merch page: live price {price} missing")
+    for item in MERCH_DATA["products"]:
+        if item["url"] not in merch_text:
+            fail(errors, f"merch page: product URL missing {item['url']}")
 
     expected_shop_occurrences = {
         "index.html": 1,
-        "merch/the-ultimate-cardio/index.html": 3,  # Two CTAs plus JSON-LD significantLink
+        "merch/the-ultimate-cardio/index.html": 4,  # Three CTAs plus JSON-LD significantLink
     }
     for rel, expected_count in expected_shop_occurrences.items():
         text = (ROOT / rel).read_text(encoding="utf-8")
@@ -183,20 +195,21 @@ def main() -> int:
             fail(errors, f"{rel}: expected {expected_count} official shop URL occurrence(s)")
 
     home = (ROOT / "index.html").read_text(encoding="utf-8")
-    merch_first = home.find('class="shop-band shop-band-home"')
+    merch_first = home.find('class="campaign-hero campaign-home"')
+    merch_preview = home.find('id="home-merch-preview-title"')
     artist_intro = home.find('class="shell hero"')
     selected_work = home.find('id="selected-work-title"')
-    if min(merch_first, artist_intro, selected_work) < 0 or not merch_first < artist_intro < selected_work:
+    if min(merch_first, merch_preview, artist_intro, selected_work) < 0 or not merch_first < merch_preview < artist_intro < selected_work:
         fail(errors, "index.html: merch-first section order regressed")
 
     merch = (ROOT / "merch/the-ultimate-cardio/index.html").read_text(encoding="utf-8")
     required_merch_images = (
-        "ultimate-cardio-yellow-road-close.webp",
-        "ultimate-cardio-yellow-road-run.webp",
-        "ultimate-cardio-black-road-run.webp",
-        "ultimate-cardio-red-road-run.webp",
-        "ultimate-cardio-red-trail-run.webp",
-        "ultimate-cardio-pink-track.webp",
+        "stadium-lifestyle.webp",
+        "hoodie-locker.webp",
+        "training-tops.webp",
+        "headwear-locker.webp",
+        "shorts-track.webp",
+        "collection-flatlay.webp",
     )
     for image in required_merch_images:
         if image not in merch:
@@ -242,7 +255,7 @@ def main() -> int:
 
     print("SITE VERIFICATION PASSED")
     print(f"pages={len(EXPECTED)} canonicals={len(found_canonicals)} internal_routes={len(all_internal_routes)}")
-    print("prototype_markers=0 forbidden_shopify_links=0 public_fragment_routes=0 official_shop_url_occurrences=4")
+    print("prototype_markers=0 stale_shop_hosts=0 public_fragment_routes=0 approved_shop_links=10")
     return 0
 
 

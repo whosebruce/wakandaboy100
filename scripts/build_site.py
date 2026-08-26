@@ -9,8 +9,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://wakandaboy100.com"
 OG = f"{SITE}/og-image.png?v=4"
-SHOP = "https://collins-wewa-shop.fourthwall.com/collections/the-ultimate-cardio"
 MEDIA = json.loads((ROOT / "content/media.json").read_text(encoding="utf-8"))
+MERCH_DATA = json.loads((ROOT / "content/merch.json").read_text(encoding="utf-8"))
+SHOP = MERCH_DATA["shop_url"]
+PRODUCTS = MERCH_DATA["products"]
 
 SOCIALS = [
     ("YouTube", "https://www.youtube.com/@wakandaboy100"),
@@ -177,11 +179,45 @@ def media_cards(items: list[dict]) -> str:
     return "".join(cards)
 
 
+def product_cards(items: list[dict], *, compact: bool = False) -> str:
+    cards = []
+    extra_class = " product-card-compact" if compact else ""
+    for item in items:
+        name = html.escape(item["name"])
+        short_name = html.escape(item["short_name"])
+        price = html.escape(item["price"])
+        url = html.escape(item["url"], quote=True)
+        image = html.escape(item["image"], quote=True)
+        alt = html.escape(item["alt"], quote=True)
+        color_names = ", ".join(item["colors"])
+        color_summary = f'{len(item["colors"])} color' + ("" if len(item["colors"]) == 1 else "s")
+        cards.append(
+            f'<a class="product-card{extra_class}" href="{url}" target="_blank" rel="noopener" '
+            f'aria-label="Shop {name} for {price}">'
+            f'<span class="product-media"><img loading="lazy" src="{image}" alt="{alt}" width="1000" height="1000"></span>'
+            f'<span class="product-meta"><span class="product-kicker">{html.escape(color_summary)} · From {price}</span>'
+            f'<strong>{short_name}</strong><span class="product-colors">{html.escape(color_names)}</span>'
+            f'<span class="product-shop">Shop now <span aria-hidden="true">↗</span></span></span></a>'
+        )
+    return "".join(cards)
+
+
 HOME = f"""
-<section class="shop-band shop-band-home"><div class="shell section shop-grid">
-  <div class="shop-image shop-hero-image"><img src="/assets/images/ultimate-cardio-yellow-road-hero.webp" alt="Runner wearing a yellow The Ultimate Cardio shirt on a sunlit road" width="2200" height="1228" fetchpriority="high"><span class="drop-badge">Drop 001</span></div>
-  <div class="shop-copy"><p class="eyebrow">The fitness drop · Now live</p><h2 class="display">The Ultimate<br>Cardio</h2><h3>Built to move</h3><p>Choose the contrast made for your colorway: black print or white print on a premium unisex supersoft T-shirt.</p><span class="status-chip">$38 · Two print treatments</span><div class="actions"><a class="button light" href="/merch/the-ultimate-cardio/">View the full collection</a><a class="button light" href="{SHOP}" target="_blank" rel="noopener">Shop Drop 001</a></div></div>
-</div></section>
+<section class="campaign-hero campaign-home" aria-labelledby="campaign-home-title">
+  <img class="campaign-backdrop" src="/assets/images/ultimate-cardio-v2/collection-flatlay.webp" alt="The Ultimate Cardio full apparel and headwear collection arranged on a running-track surface" width="1672" height="941" fetchpriority="high">
+  <div class="campaign-scrim"></div>
+  <div class="shell campaign-copy">
+    <p class="eyebrow">The full collection · Now live</p>
+    <h2 class="display" id="campaign-home-title">The Ultimate<br>Cardio</h2>
+    <p>Training gear and everyday pieces built around one statement—T-shirts, hoodies, headwear, tanks, crop tops, and right-leg mesh shorts.</p>
+    <span class="status-chip status-chip-light">From $29 · Nine live styles</span>
+    <div class="actions"><a class="button light" href="/merch/the-ultimate-cardio/">Explore the collection</a><a class="button dark-outline" href="{SHOP}" target="_blank" rel="noopener">Shop all merch ↗</a></div>
+  </div>
+</section>
+<section class="shell section compact home-merch-preview" aria-labelledby="home-merch-preview-title">
+  <div class="section-head"><div><p class="eyebrow">Featured now</p><h2 class="display" id="home-merch-preview-title">Gear for the<br>whole session</h2></div><a class="button" href="/merch/the-ultimate-cardio/">See all nine styles →</a></div>
+  <div class="product-grid product-grid-preview">{product_cards(PRODUCTS[:4], compact=True)}</div>
+</section>
 <section class="shell hero" aria-labelledby="home-title">
   <div>
     <p class="eyebrow">Independent artist · Performer · Creator</p>
@@ -261,16 +297,40 @@ BOOKING = """
 """
 
 MERCH = f"""
-<section class="page-hero"><div class="shell page-hero-grid"><div><p class="eyebrow">WAKANDABOY100 merchandise</p><h1 class="display">The Ultimate<br>Cardio</h1><p class="lede">Drop 001 from WAKANDABOY100. Choose the contrast made for your colorway.</p></div><div class="page-mark merch-page-mark"><img src="/assets/images/ultimate-cardio-yellow-road-close.webp" alt="Runner wearing a yellow The Ultimate Cardio shirt on a sunlit road" width="1600" height="1986" fetchpriority="high"></div></div></section>
-<section class="shell section merch-detail"><div class="shop-image"><img src="/assets/images/the-ultimate-cardio-campaign.webp" alt="The Ultimate Cardio shirt — front and back" width="1600" height="1200"><span class="drop-badge">Drop 001</span></div><div class="prose"><p class="eyebrow">WAKANDABOY100 merch</p><h2>The Ultimate<br>Cardio</h2><p>A compact collegiate chest mark meets a bold back statement on a premium unisex supersoft T-shirt. Black print is offered on Asphalt, Red, Yellow, and Solid White Blend. White print is offered on Black, Charity Pink, and True Royal. Availability varies by size.</p><p><strong>$38</strong> · Printed on demand</p><div class="actions"><a class="button primary" href="{SHOP}" target="_blank" rel="noopener">Shop the drop</a></div></div></section>
-<section class="shell section compact" aria-labelledby="drop-gallery-title"><div class="section-head"><div><p class="eyebrow">Drop 001 preview</p><h2 class="display" id="drop-gallery-title">Front / Back</h2></div></div><div class="merch-gallery"><figure><img loading="lazy" src="/assets/images/the-ultimate-cardio-front.webp" alt="Front view of The Ultimate Cardio shirt" width="1200" height="1200"><figcaption>Front</figcaption></figure><figure><img loading="lazy" src="/assets/images/the-ultimate-cardio-back.webp" alt="Back view of The Ultimate Cardio shirt" width="1200" height="1200"><figcaption>Back</figcaption></figure></div></section>
-<section class="shell section compact" aria-labelledby="lifestyle-gallery-title"><div class="section-head"><div><p class="eyebrow">Made to move</p><h2 class="display" id="lifestyle-gallery-title">Road / Trail / Track</h2><p class="intro">The same compact chest mark across the Drop 001 color range.</p></div><a class="button" href="{SHOP}" target="_blank" rel="noopener">Shop the collection →</a></div><div class="lifestyle-gallery">
-  <figure class="lifestyle-card"><img loading="lazy" src="/assets/images/ultimate-cardio-yellow-road-run.webp" alt="Runner in a yellow The Ultimate Cardio shirt on a sunlit road" width="1600" height="1986"><figcaption><strong>Yellow</strong><span>Road training</span></figcaption></figure>
-  <figure class="lifestyle-card"><img loading="lazy" src="/assets/images/ultimate-cardio-black-road-run.webp" alt="Runner in a black The Ultimate Cardio shirt at sunset" width="1800" height="1005"><figcaption><strong>Black</strong><span>Sunset miles</span></figcaption></figure>
-  <figure class="lifestyle-card"><img loading="lazy" src="/assets/images/ultimate-cardio-red-road-run.webp" alt="Runner in a red The Ultimate Cardio shirt on an open road" width="1800" height="1005"><figcaption><strong>Red</strong><span>Road training</span></figcaption></figure>
-  <figure class="lifestyle-card"><img loading="lazy" src="/assets/images/ultimate-cardio-red-trail-run.webp" alt="Runner in a red The Ultimate Cardio shirt on a wooded trail" width="1600" height="1986"><figcaption><strong>Red</strong><span>Trail miles</span></figcaption></figure>
-  <figure class="lifestyle-card"><img loading="lazy" src="/assets/images/ultimate-cardio-pink-track.webp" alt="Runner in a pink The Ultimate Cardio shirt after a track workout" width="1800" height="1208"><figcaption><strong>Charity Pink</strong><span>Track cooldown</span></figcaption></figure>
+<section class="campaign-hero campaign-merch" aria-labelledby="merch-title">
+  <img class="campaign-backdrop" src="/assets/images/ultimate-cardio-v2/stadium-lifestyle.webp" alt="Athletes wearing The Ultimate Cardio hoodie, T-shirt, and mesh shorts in a stadium tunnel" width="1672" height="941" fetchpriority="high">
+  <div class="campaign-scrim"></div>
+  <div class="shell campaign-copy">
+    <p class="eyebrow">The Ultimate Cardio by WAKANDABOY100</p>
+    <h1 class="display" id="merch-title">Built for the<br>whole session</h1>
+    <p>Nine live styles. Color-matched print treatments. Made-to-order gear for training, movement, and everything after.</p>
+    <div class="actions"><a class="button light" href="{SHOP}" target="_blank" rel="noopener">Shop the full collection ↗</a></div>
+  </div>
+</section>
+<section class="collection-stats" aria-label="The Ultimate Cardio collection summary"><div class="shell collection-stats-grid">
+  <div><strong>09</strong><span>Live styles</span></div><div><strong>$29</strong><span>Starting price</span></div><div><strong>07</strong><span>Hoodie colorways</span></div><div><strong>2XS–6XL</strong><span>Widest size range</span></div>
 </div></section>
+<section class="shell section" aria-labelledby="collection-grid-title">
+  <div class="section-head"><div><p class="eyebrow">Shop every style</p><h2 class="display" id="collection-grid-title">The full<br>collection</h2><p class="intro">Official product renders below show the real live products. Select a style to choose its available color and size in the shop.</p></div><a class="button" href="{SHOP}" target="_blank" rel="noopener">Open the shop ↗</a></div>
+  <div class="product-grid">{product_cards(PRODUCTS)}</div>
+</section>
+<section class="spotlight spotlight-dark"><div class="shell spotlight-grid">
+  <div class="spotlight-media"><img loading="lazy" src="/assets/images/ultimate-cardio-v2/hoodie-locker.webp" alt="The Ultimate Cardio hoodie collection displayed in a dark athletic locker room" width="1672" height="941"></div>
+  <div class="spotlight-copy"><p class="eyebrow">Layer up</p><h2 class="display">The Hoodie<br>Rotation</h2><p>Front-chest artwork. A vertical wearer-right sleeve treatment. Seven garment colors paired with black or white print for contrast.</p><ul class="color-list"><li>Black</li><li>Forest Green</li><li>Light Pink</li><li>Team Red</li><li>Team Gold</li><li>White</li><li>Carbon Grey</li></ul><a class="button light" href="https://shop.wakandaboy100.com/products/the-ultimate-cardio-hoodie" target="_blank" rel="noopener">Shop hoodies · From $62 ↗</a></div>
+</div></section>
+<section class="shell section spotlight-grid spotlight-grid-light">
+  <div class="spotlight-copy"><p class="eyebrow">Training tops</p><h2 class="display">Two fits.<br>Two treatments.</h2><p>Men’s training tanks and women’s crop tops come in Black and White, with a centered treatment or an across-chest wordmark.</p><div class="actions"><a class="button primary" href="https://shop.wakandaboy100.com/products/the-ultimate-cardio-mens-training-tank" target="_blank" rel="noopener">Men's tanks · From $29</a><a class="button" href="https://shop.wakandaboy100.com/products/the-ultimate-cardio-womens-crop-top" target="_blank" rel="noopener">Women's crops · From $31</a></div></div>
+  <div class="spotlight-media"><img loading="lazy" src="/assets/images/ultimate-cardio-v2/training-tops.webp" alt="Athletes wearing black and white The Ultimate Cardio tanks and crop tops" width="1672" height="941"></div>
+</section>
+<section class="spotlight spotlight-dark"><div class="shell spotlight-grid spotlight-grid-reverse">
+  <div class="spotlight-media"><img loading="lazy" src="/assets/images/ultimate-cardio-v2/headwear-locker.webp" alt="The Ultimate Cardio caps and beanies displayed across the full color range" width="1672" height="941"></div>
+  <div class="spotlight-copy"><p class="eyebrow">Finish the fit</p><h2 class="display">Caps +<br>Beanies</h2><p>Six low-profile cap colors and seven embroidered beanie colors—each matched to a high-contrast front wordmark.</p><div class="actions"><a class="button light" href="https://shop.wakandaboy100.com/products/the-ultimate-cardio-low-profile-cap" target="_blank" rel="noopener">Caps · $32</a><a class="button dark-outline" href="https://shop.wakandaboy100.com/products/the-ultimate-cardio-embroidered-beanie" target="_blank" rel="noopener">Beanies · $31</a></div></div>
+</div></section>
+<section class="shell section spotlight-grid spotlight-grid-light shorts-spotlight">
+  <div class="spotlight-copy"><p class="eyebrow">Right-leg statement</p><h2 class="display">Move without<br>blending in</h2><p>White recycled mesh shorts with a black vertical wordmark on the wearer’s right leg. Moisture-wicking, two-way stretch, and available from 2XS through 6XL.</p><a class="button primary" href="https://shop.wakandaboy100.com/products/the-ultimate-cardio-mesh-shorts-vertical-right-side-black-print" target="_blank" rel="noopener">Shop mesh shorts · From $41 ↗</a></div>
+  <div class="spotlight-media"><img loading="lazy" src="/assets/images/ultimate-cardio-v2/shorts-track.webp" alt="Runner wearing white The Ultimate Cardio mesh shorts and a black training tank on a track" width="1672" height="941"></div>
+</section>
+<section class="collection-final"><img loading="lazy" src="/assets/images/ultimate-cardio-v2/collection-flatlay.webp" alt="The Ultimate Cardio apparel and headwear collection" width="1672" height="941"><div class="collection-final-scrim"></div><div class="shell collection-final-copy"><p class="eyebrow">The collection is live</p><h2 class="display">Choose your<br>colorway</h2><p>Made to order. Color and size availability varies by style.</p><a class="button light" href="{SHOP}" target="_blank" rel="noopener">Shop The Ultimate Cardio ↗</a></div></section>
 """
 
 PAGES = [
@@ -279,7 +339,7 @@ PAGES = [
     ("videos/index.html", dict(title="WAKANDABOY100 Videos | Collins Wewa", description="Watch WAKANDABOY100 music videos and performance work by Collins Wewa, including My Baby, Heart Broken, Pull the Plug, and Dance With Me.", path="/videos/", active="videos", body=VIDEOS, page_type="CollectionPage")),
     ("music/index.html", dict(title="WAKANDABOY100 Music | Stream Collins Wewa", description="Stream WAKANDABOY100 music by Collins Wewa on Spotify, Apple Music, SoundCloud, Audiomack, Pandora, and YouTube.", path="/music/", active="music", body=MUSIC, page_type="CollectionPage")),
     ("booking/index.html", dict(title="Book WAKANDABOY100 | Collins Wewa Performances", description="Request Collins Wewa—WAKANDABOY100—for birthdays, parties, private events, appearances, and performance opportunities.", path="/booking/", active="booking", body=BOOKING, page_type="ContactPage")),
-    ("merch/the-ultimate-cardio/index.html", dict(title="The Ultimate Cardio by WAKANDABOY100 | Merch", description="Shop The Ultimate Cardio T-shirt, Drop 001 from Collins Wewa and WAKANDABOY100, in black-print and white-print colorways for $38.", path="/merch/the-ultimate-cardio/", active="merch", body=MERCH, page_type="CollectionPage", schema_extra={"significantLink": SHOP}, og_image=f"{SITE}/assets/images/ultimate-cardio-og.jpg?v=1", og_alt="Runner wearing a yellow The Ultimate Cardio shirt on a sunlit road")),
+    ("merch/the-ultimate-cardio/index.html", dict(title="The Ultimate Cardio Collection | WAKANDABOY100 Merch", description="Shop the full The Ultimate Cardio collection by WAKANDABOY100: T-shirts, hoodies, caps, beanies, tanks, crop tops, and mesh shorts from $29.", path="/merch/the-ultimate-cardio/", active="merch", body=MERCH, page_type="CollectionPage", schema_extra={"significantLink": SHOP}, og_image=f"{SITE}/assets/images/ultimate-cardio-og-v2.jpg?v=2", og_alt="The Ultimate Cardio full apparel and headwear collection by WAKANDABOY100")),
 ]
 
 

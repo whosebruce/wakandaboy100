@@ -28,7 +28,7 @@
 - Display hero with visible `Collins Wewa / Comedy · Music · Dance` identity line
 - Full-width black marquee for brand rhythm
 - White proof cards on heather background
-- Dark merch band with approved shirt reference
+- Full-width dark merchandise campaign with official product cards and editorial collection imagery
 - Route-specific page hero with dancer-mark panel
 - Restrained 8px corners; no ornamental pills
 - Buttons use square two-pixel borders and high-contrast fills
@@ -46,6 +46,6 @@
 ## Content and commerce guardrails
 
 - WAKANDABOY100, Collins Wewa, and The Ultimate Cardio remain explicit entities.
-- The Ultimate Cardio product direction can be shown before launch, but checkout availability and price cannot be implied.
-- Checkout remains offline until an official release is announced.
-- Never invent testimonials, clients, prices, inventory, shipping promises, or product photography.
+- The Ultimate Cardio collection is live at `shop.wakandaboy100.com`; visible prices, colors, sizes, and product links must match the current storefront.
+- Product cards use official Fourthwall renders. Generated campaign photography may add atmosphere but cannot replace product truth or invent garments, colors, print regions, or promises.
+- Never invent testimonials, clients, prices, inventory, shipping promises, or product claims.

@@ -1,0 +1,87 @@
+{
+  "collection_name": "The Ultimate Cardio",
+  "shop_url": "https://shop.wakandaboy100.com/collections/all",
+  "products": [
+    {
+      "name": "The Ultimate Cardio T-Shirt",
+      "short_name": "T-Shirt",
+      "price": "$38",
+      "url": "https://shop.wakandaboy100.com/products/the-ultimate-cardio-t-shirt",
+      "image": "/assets/images/ultimate-cardio-v2/product-tshirt.webp",
+      "alt": "The Ultimate Cardio T-Shirt in charcoal with a compact front chest treatment",
+      "colors": ["Asphalt", "Red", "Yellow", "Solid White Blend", "True Royal", "Charity Pink", "Black"]
+    },
+    {
+      "name": "The Ultimate Cardio Hoodie",
+      "short_name": "Hoodie",
+      "price": "$62",
+      "url": "https://shop.wakandaboy100.com/products/the-ultimate-cardio-hoodie",
+      "image": "/assets/images/ultimate-cardio-v2/product-hoodie.webp",
+      "alt": "Black The Ultimate Cardio Hoodie with white front and right-sleeve artwork",
+      "colors": ["Black", "Forest Green", "Light Pink", "Team Red", "Team Gold", "White", "Carbon Grey"]
+    },
+    {
+      "name": "The Ultimate Cardio Low-Profile Cap",
+      "short_name": "Low-Profile Cap",
+      "price": "$32",
+      "url": "https://shop.wakandaboy100.com/products/the-ultimate-cardio-low-profile-cap",
+      "image": "/assets/images/ultimate-cardio-v2/product-cap.webp",
+      "alt": "Red The Ultimate Cardio low-profile cap with black front wordmark",
+      "colors": ["Red", "White", "Dark Green", "Black", "Dark Navy", "Royal"]
+    },
+    {
+      "name": "The Ultimate Cardio Embroidered Beanie",
+      "short_name": "Embroidered Beanie",
+      "price": "$31",
+      "url": "https://shop.wakandaboy100.com/products/the-ultimate-cardio-embroidered-beanie",
+      "image": "/assets/images/ultimate-cardio-v2/product-beanie.webp",
+      "alt": "Gold The Ultimate Cardio embroidered beanie with red front stitching",
+      "colors": ["Gold", "Black", "Royal", "Baby Pink", "Spruce", "Red", "White"]
+    },
+    {
+      "name": "The Ultimate Cardio Men's Training Tank",
+      "short_name": "Men's Training Tank",
+      "price": "$29",
+      "url": "https://shop.wakandaboy100.com/products/the-ultimate-cardio-mens-training-tank",
+      "image": "/assets/images/ultimate-cardio-v2/product-mens-tank.webp",
+      "alt": "Black men's The Ultimate Cardio training tank with white two-line front artwork",
+      "colors": ["Black", "White"]
+    },
+    {
+      "name": "The Ultimate Cardio Men's Training Tank — Across Chest",
+      "short_name": "Men's Across-Chest Tank",
+      "price": "$29",
+      "url": "https://shop.wakandaboy100.com/products/the-ultimate-cardio-mens-training-tank-across-chest-2",
+      "image": "/assets/images/ultimate-cardio-v2/product-mens-across.webp",
+      "alt": "Black men's The Ultimate Cardio training tank with white one-line across-chest artwork",
+      "colors": ["Black", "White"]
+    },
+    {
+      "name": "The Ultimate Cardio Women's Crop Top",
+      "short_name": "Women's Crop Top",
+      "price": "$31",
+      "url": "https://shop.wakandaboy100.com/products/the-ultimate-cardio-womens-crop-top",
+      "image": "/assets/images/ultimate-cardio-v2/product-womens-crop.webp",
+      "alt": "Black women's The Ultimate Cardio crop top with white two-line front artwork",
+      "colors": ["Black", "White"]
+    },
+    {
+      "name": "The Ultimate Cardio Women's Crop Top — Across Chest",
+      "short_name": "Women's Across-Chest Crop Top",
+      "price": "$31",
+      "url": "https://shop.wakandaboy100.com/products/the-ultimate-cardio-womens-crop-top-across-chest-2",
+      "image": "/assets/images/ultimate-cardio-v2/product-womens-across.webp",
+      "alt": "White women's The Ultimate Cardio crop top with black one-line across-chest artwork",
+      "colors": ["Black", "White"]
+    },
+    {
+      "name": "The Ultimate Cardio Mesh Shorts — Right Leg",
+      "short_name": "Mesh Shorts",
+      "price": "$41",
+      "url": "https://shop.wakandaboy100.com/products/the-ultimate-cardio-mesh-shorts-vertical-right-side-black-print",
+      "image": "/assets/images/ultimate-cardio-v2/product-shorts.webp",
+      "alt": "White The Ultimate Cardio mesh shorts with black vertical artwork on the wearer's right leg",
+      "colors": ["White"]
+    }
+  ]
+}

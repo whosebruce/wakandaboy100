@@ -148,6 +148,65 @@ button,input,textarea{font:inherit}
 .merch-specs span{display:block;margin-top:5px;color:var(--muted)}
 .notice{border-left:4px solid var(--ink);background:rgba(255,255,255,.45);padding:16px 18px;color:#37373e}
 
+/* The Ultimate Cardio full-collection campaign */
+.campaign-hero{position:relative;min-height:680px;display:flex;align-items:center;overflow:hidden;background:#0e0e12;color:var(--white);isolation:isolate}
+.campaign-backdrop{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.campaign-scrim{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(8,8,11,.96) 0%,rgba(8,8,11,.78) 34%,rgba(8,8,11,.22) 67%,rgba(8,8,11,.08) 100%)}
+.campaign-copy{padding-block:96px}
+.campaign-copy .eyebrow{color:#c9c9ce}
+.campaign-copy h1,.campaign-copy h2{font-size:clamp(4.8rem,10vw,8.4rem);max-width:760px}
+.campaign-copy p:not(.eyebrow){max-width:590px;margin:26px 0 0;color:#d1d1d6;font-size:1.1rem;text-wrap:balance}
+.campaign-copy .actions{max-width:720px}
+.status-chip-light{border-color:rgba(255,255,255,.28);color:#ededf0}
+.home-merch-preview{border-bottom:1px solid var(--line)}
+
+.collection-stats{background:var(--ink);color:var(--white);border-top:1px solid #303038;border-bottom:1px solid #303038}
+.collection-stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.collection-stats-grid div{min-height:130px;padding:26px 24px;border-left:1px solid #303038;display:flex;flex-direction:column;justify-content:center}
+.collection-stats-grid div:last-child{border-right:1px solid #303038}
+.collection-stats-grid strong{font-family:var(--display);font-size:2.65rem;font-weight:400;line-height:1}
+.collection-stats-grid span{margin-top:7px;color:#a9a9b1;font-family:var(--ui);font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+
+.product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.product-grid-preview{grid-template-columns:repeat(4,minmax(0,1fr))}
+.product-card{display:flex;min-width:0;flex-direction:column;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--white);transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.product-card:hover{opacity:1;transform:translateY(-5px);border-color:rgba(21,21,26,.42);box-shadow:0 20px 46px rgba(0,0,0,.14)}
+.product-media{display:grid;place-items:center;aspect-ratio:1;background:radial-gradient(circle at 50% 18%,#f3f3f5 0%,#dbdbe0 72%);overflow:hidden;border-bottom:1px solid var(--line)}
+.product-media img{width:88%;height:88%;object-fit:contain;filter:drop-shadow(0 18px 16px rgba(0,0,0,.16));transition:transform .25s ease}
+.product-card:hover .product-media img{transform:scale(1.025)}
+.product-meta{display:flex;flex:1;flex-direction:column;padding:18px}
+.product-kicker{color:var(--muted);font-family:var(--ui);font-size:.76rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+.product-meta strong{margin-top:7px;font-family:var(--display);font-size:1.55rem;font-weight:400;line-height:1.03;text-transform:uppercase}
+.product-colors{margin-top:10px;color:var(--muted);font-size:.84rem;line-height:1.4}
+.product-shop{display:flex;justify-content:space-between;gap:12px;margin-top:auto;padding-top:18px;font-family:var(--ui);font-size:.85rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.product-card-compact .product-meta strong{font-size:1.3rem}
+.product-card-compact .product-colors{display:none}
+
+.spotlight{padding-block:80px}
+.spotlight-dark{background:#0e0e12;color:var(--white)}
+.spotlight-dark .eyebrow{color:#8f8f98}
+.spotlight-grid{display:grid;grid-template-columns:1.18fr .82fr;gap:52px;align-items:center}
+.spotlight-grid-light{padding-block:80px}
+.spotlight-grid-reverse{grid-template-columns:1.1fr .9fr}
+.spotlight-media{overflow:hidden;border:1px solid rgba(255,255,255,.13);border-radius:8px;background:#15151a;box-shadow:0 24px 70px rgba(0,0,0,.22)}
+.spotlight-grid-light .spotlight-media{border-color:var(--line)}
+.spotlight-media img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.spotlight-copy h2{font-size:clamp(3.7rem,7vw,6rem)}
+.spotlight-copy p:not(.eyebrow){max-width:520px;color:inherit;opacity:.78;font-size:1.04rem}
+.spotlight-copy>.button{margin-top:25px}
+.color-list{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:24px 0 0;padding:0}
+.color-list li{border:1px solid #3c3c44;padding:7px 10px;color:#c6c6cc;font-family:var(--ui);font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.shorts-spotlight .spotlight-media img{object-position:center 48%}
+
+.collection-final{position:relative;min-height:620px;display:flex;align-items:center;overflow:hidden;background:#0e0e12;color:var(--white);isolation:isolate}
+.collection-final>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.collection-final-scrim{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(8,8,11,.95),rgba(8,8,11,.62) 40%,rgba(8,8,11,.08) 74%)}
+.collection-final-copy{padding-block:90px}
+.collection-final-copy .eyebrow{color:#bcbcc2}
+.collection-final-copy h2{font-size:clamp(4.2rem,8vw,7rem)}
+.collection-final-copy p{color:#ceced3}
+.collection-final-copy .button{margin-top:22px}
+
 .site-footer{position:relative;overflow:hidden;background:#0e0e12;color:#e9e9ea}
 .footer-shell{position:relative;padding:68px 0 34px}
 .footer-art{position:absolute;right:0;top:-20px;height:330px;opacity:.14;pointer-events:none}
@@ -162,8 +221,10 @@ button,input,textarea{font:inherit}
   .hero>*,.page-hero-grid>*,.shop-grid>*,.split>*,.merch-detail>*{min-width:0}
   .nav-shell{min-height:64px}.menu-toggle{display:block}.site-nav{display:none;position:absolute;top:64px;left:0;right:0;padding:14px 24px 20px;background:var(--paper);border-bottom:1px solid var(--line);flex-wrap:wrap}.site-nav.is-open{display:flex}.site-nav a{flex:1 1 42%;border:1px solid var(--line);text-align:center}.site-nav .watch-link{margin:0}
   .hero,.page-hero-grid,.shop-grid,.split,.merch-detail{grid-template-columns:1fr}.hero{padding-top:48px}.hero-art{min-height:540px}.page-mark{justify-self:start;width:280px}.page-hero{padding-top:54px}.card-grid,.booking-grid{grid-template-columns:1fr 1fr}.platform-grid,.lifestyle-gallery{grid-template-columns:1fr 1fr}.contact-panel{grid-template-columns:1fr}
+  .campaign-hero{min-height:610px}.campaign-copy{padding-block:76px}.campaign-scrim{background:linear-gradient(90deg,rgba(8,8,11,.94),rgba(8,8,11,.7) 54%,rgba(8,8,11,.2))}.collection-stats-grid{grid-template-columns:1fr 1fr}.collection-stats-grid div:nth-child(odd){border-left:1px solid #303038}.product-grid,.product-grid-preview{grid-template-columns:1fr 1fr}.spotlight-grid,.spotlight-grid-reverse{grid-template-columns:1fr;gap:32px}.spotlight-grid-light .spotlight-copy{order:2}.spotlight-grid-light .spotlight-media{order:1}
 }
 @media (max-width:620px){
   .shell,.nav-shell{width:min(100% - 28px,var(--max))}.brand-name{font-size:1.03rem;letter-spacing:.1em}.hero{gap:32px;padding-top:38px}.hero h1{font-size:clamp(3.2rem,16.5vw,4rem);line-height:.88}.hero h1 .outline{display:block;line-height:.95}.hero .eyebrow{font-size:.76rem;letter-spacing:.2em;overflow-wrap:anywhere}.hero .artist-line{font-size:.94rem;letter-spacing:.11em}.hero .lede{font-size:1rem;overflow-wrap:anywhere}.hero-art{min-height:460px}.hero-art .ghost-number{font-size:17rem}.stats{gap:10px}.stats div{min-width:0}.stats dt{font-size:1.9rem}.stats dd{font-size:.66rem;letter-spacing:.09em;overflow-wrap:anywhere}.actions{display:grid;grid-template-columns:1fr}.button{width:100%}.section{padding:60px 0}.section-head h2{font-size:2.9rem}.card-grid,.platform-grid,.booking-grid,.lifestyle-gallery{grid-template-columns:1fr}.feature-meta{align-items:flex-start}.video-poster{aspect-ratio:16/10}.play-badge{width:62px;height:62px;font-size:.8rem}.shop-copy h2{font-size:3.25rem}.page-hero h1{font-size:3.9rem}.page-mark{width:220px}.merch-specs{grid-template-columns:1fr}.footer-art{right:-80px}.footer-base{flex-direction:column}.marquee-track{font-size:1.35rem}.contact-panel{padding:22px}
+  .campaign-hero{min-height:640px;align-items:flex-end}.campaign-backdrop{object-position:65% center}.campaign-scrim{background:linear-gradient(0deg,rgba(8,8,11,.98) 0%,rgba(8,8,11,.86) 42%,rgba(8,8,11,.22) 100%)}.campaign-copy{padding-block:54px}.campaign-copy h1,.campaign-copy h2{font-size:3.8rem}.campaign-copy p:not(.eyebrow){font-size:1rem}.collection-stats-grid{grid-template-columns:1fr 1fr}.collection-stats-grid div{min-height:112px;padding:20px 14px}.collection-stats-grid strong{font-size:2rem}.collection-stats-grid span{font-size:.68rem}.product-grid,.product-grid-preview{grid-template-columns:1fr}.product-meta strong{font-size:1.45rem}.spotlight,.spotlight-grid-light{padding-block:60px}.spotlight-copy h2{font-size:3.6rem}.collection-final{min-height:620px;align-items:flex-end}.collection-final>img{object-position:68% center}.collection-final-scrim{background:linear-gradient(0deg,rgba(8,8,11,.98),rgba(8,8,11,.78) 50%,rgba(8,8,11,.18))}.collection-final-copy{padding-block:52px}.collection-final-copy h2{font-size:3.8rem}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.marquee-track{animation:none}.button,.video-poster img{transition:none}}

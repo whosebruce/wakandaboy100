@@ -23,7 +23,7 @@ A clean athletic/collegiate performer identity: **heather grey, ink black, paper
 2. “My Baby” is the flagship public proof point.
 3. Music/video/booking/merch each receive a real crawlable route.
 4. The Ultimate Cardio is positioned as `The Ultimate Cardio by WAKANDABOY100`, not generic fitness content.
-5. Merchandise status must be truthful: a preview is not the same as an available checkout.
+5. Merchandise status must be truthful: the site presents the nine live products and sends checkout to the exact `shop.wakandaboy100.com` collection/product URLs.
 
 ## Motion and responsive rules
 
@@ -36,5 +36,6 @@ A clean athletic/collegiate performer identity: **heather grey, ink black, paper
 ## Protected assets
 
 - Do not redraw or substitute the dancer mark.
-- Do not alter shirt wording, front/back composition, or garment direction without owner approval.
+- Do not alter merchandise wording, print composition, garment direction, or color mapping without owner approval.
 - Production print art, a technical placement proof, and a storefront mockup are separate deliverables.
+- Generated lifestyle photography is a campaign layer; official storefront renders remain the product-reference layer.
