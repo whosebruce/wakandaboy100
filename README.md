@@ -11,6 +11,7 @@ Collins Wewa is an independent artist and performer working across music, dance,
 | `/` | Brand home: merch campaign, artist intro, selected videos and streaming links |
 | `/about/` | Collins Wewa biography and entity page |
 | `/videos/` | Music video, performance and comedy catalog |
+| `/videos/los-angeles-airport/` | "Los Angeles Airport" official lyric video (self-hosted player) and streaming links |
 | `/music/` | Verified streaming profiles |
 | `/booking/` | Private-event and performance requests (currently through Instagram DM) |
 | `/merch/the-ultimate-cardio/` | Full nine-style collection page with links to the official shop |
@@ -22,12 +23,12 @@ Public navigation uses real directory-index routes. There is no HashRouter; the 
 Requires Python 3 (CI uses 3.12).
 
 ```bash
-python3 scripts/build_site.py    # regenerate the six route pages
+python3 scripts/build_site.py    # regenerate the seven route pages
 python3 scripts/verify_site.py   # check routes, metadata, links and assets
 python3 -m http.server 8000      # preview at http://localhost:8000
 ```
 
-The six route pages are generated. Edit `scripts/build_site.py` (page templates, navigation, social links, structured data) or the JSON in `content/`, then rebuild. Hand edits to those `index.html` files are overwritten on the next build, including the one CI runs before every deploy. `404.html`, `style.css`, `script.js` and `sitemap.xml` are edited directly.
+The seven route pages are generated. Edit `scripts/build_site.py` (page templates, navigation, social links, structured data) or the JSON in `content/`, then rebuild. Hand edits to those `index.html` files are overwritten on the next build, including the one CI runs before every deploy. `404.html`, `style.css`, `script.js` and `sitemap.xml` are edited directly.
 
 `verify_site.py` fails on:
 
@@ -52,6 +53,10 @@ The six route pages are generated. Edit `scripts/build_site.py` (page templates,
 ├── sitemap.xml, robots.txt, CNAME
 └── DESIGN.md, DESIGN-DIRECTION.md, OPEN_DESIGN.md           # design contract
 ```
+
+## New release: Los Angeles Airport
+
+`content/release.json` drives the new-song banner and dark release section on the home page, the featured player on `/videos/`, the new-single card on `/music/`, and the song page. The lyric video is not on YouTube yet, so it is self-hosted at `assets/video/los-angeles-airport-lyric-video.mp4` (web encode under 50 MB, which `verify_site.py` enforces) with the poster `assets/images/los-angeles-airport-lyric-video-poster.webp` and share card `assets/images/los-angeles-airport-og.jpg`. Once it is on YouTube, the player can switch to the YouTube link and the MP4 can be removed.
 
 ## Adding public media
 

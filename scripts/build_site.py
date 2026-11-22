@@ -11,6 +11,7 @@ SITE = "https://wakandaboy100.com"
 OG = f"{SITE}/og-image.png?v=4"
 MEDIA = json.loads((ROOT / "content/media.json").read_text(encoding="utf-8"))
 MERCH_DATA = json.loads((ROOT / "content/merch.json").read_text(encoding="utf-8"))
+RELEASE = json.loads((ROOT / "content/release.json").read_text(encoding="utf-8"))
 SHOP = MERCH_DATA["shop_url"]
 PRODUCTS = MERCH_DATA["products"]
 
@@ -65,7 +66,7 @@ def header(active: str) -> str:
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>Menu</button>
     <nav class="site-nav" id="site-nav" aria-label="Primary navigation" data-site-nav>
       {''.join(links)}
-      <a class="watch-link" href="https://www.youtube.com/watch?v=EUQzS9nLWl8" target="_blank" rel="noopener">Watch</a>
+      <a class="watch-link" href="{RELEASE['page']}">Watch</a>
     </nav>
   </div>
 </header>"""
@@ -160,7 +161,7 @@ def document(*, title: str, description: str, path: str, active: str, body: str,
 """
     depth = len([part for part in path.strip("/").split("/") if part])
     prefix = "./" if depth == 0 else "../" * depth
-    return page.replace('href="/', f'href="{prefix}').replace('src="/', f'src="{prefix}')
+    return page.replace('href="/', f'href="{prefix}').replace('src="/', f'src="{prefix}').replace('poster="/', f'poster="{prefix}')
 
 
 def media_cards(items: list[dict]) -> str:
@@ -177,6 +178,41 @@ def media_cards(items: list[dict]) -> str:
             f'<div class="card-body"><span class="kicker">{platform}</span><h3>{title}</h3><p>{description}</p></div></a>'
         )
     return "".join(cards)
+
+
+def lyric_player(*, preload: str = "metadata") -> str:
+    """Self-hosted player for the new release (it is not on YouTube yet)."""
+    title = html.escape(f"{RELEASE['title']} ({RELEASE['label']})", quote=True)
+    return (
+        f'<figure class="lyric-player">'
+        f'<video controls playsinline preload="{preload}" poster="{RELEASE["poster"]}" width="1920" height="1080" aria-label="{title}">'
+        f'<source src="{RELEASE["video"]}" type="video/mp4">'
+        f'Your browser cannot play this video. <a href="{RELEASE["video"]}">Download the lyric video</a>.'
+        f"</video></figure>"
+    )
+
+
+def listen_buttons(*, light: bool = False) -> str:
+    style = "button light" if light else "button"
+    first = "button primary" if not light else "button light"
+    links = []
+    for i, item in enumerate(RELEASE["listen"]):
+        cls = first if i == 0 else (style if not light else "button dark-outline")
+        links.append(
+            f'<a class="{cls}" href="{html.escape(item["url"], quote=True)}" target="_blank" rel="noopener">{html.escape(item["label"])} ↗</a>'
+        )
+    return "".join(links)
+
+
+RELEASE_BANNER = f"""
+<a class="release-banner" href="{RELEASE['page']}"><span class="release-tag">New song</span><span class="release-text"><strong>{html.escape(RELEASE['title'])}</strong> · {html.escape(RELEASE['label'])} out now</span><span class="release-cta">Watch now →</span></a>"""
+
+RELEASE_SECTION = f"""
+<section class="release-section" aria-labelledby="release-home-title"><div class="shell">
+  <div class="section-head"><div><p class="eyebrow">New song · Out now</p><h2 class="display" id="release-home-title">Los Angeles<br>Airport</h2><p class="intro">{html.escape(RELEASE['summary'])}</p></div><a class="button light" href="{RELEASE['page']}">Open the lyric video →</a></div>
+  {lyric_player()}
+  <div class="release-listen"><span class="release-listen-label">Stream the single</span><div class="actions">{listen_buttons(light=True)}</div></div>
+</div></section>"""
 
 
 def product_cards(items: list[dict], *, compact: bool = False) -> str:
@@ -203,6 +239,7 @@ def product_cards(items: list[dict], *, compact: bool = False) -> str:
 
 
 HOME = f"""
+{RELEASE_BANNER}
 <section class="campaign-hero campaign-home" aria-labelledby="campaign-home-title">
   <img class="campaign-backdrop" src="/assets/images/ultimate-cardio-v2/collection-flatlay.webp" alt="The Ultimate Cardio full apparel and headwear collection arranged on a running-track surface" width="1672" height="941" fetchpriority="high">
   <div class="campaign-scrim"></div>
@@ -218,6 +255,7 @@ HOME = f"""
   <div class="section-head"><div><p class="eyebrow">Featured now</p><h2 class="display" id="home-merch-preview-title">Gear for the<br>whole session</h2></div><a class="button" href="/merch/the-ultimate-cardio/">See all nine styles →</a></div>
   <div class="product-grid product-grid-preview">{product_cards(PRODUCTS[:4], compact=True)}</div>
 </section>
+{RELEASE_SECTION}
 <section class="shell hero" aria-labelledby="home-title">
   <div>
     <p class="eyebrow">Independent artist · Performer · Creator</p>
@@ -240,7 +278,7 @@ HOME = f"""
     <span class="art-label">The Ultimate Cardio</span><span class="art-footer">Independent · Presented pro</span>
   </div>
 </section>
-<div class="marquee" aria-hidden="true"><div class="marquee-track"><span>Comedy <b>✦</b> Music <b>✦</b> Dance <b>✦</b> The Ultimate Cardio <b>✦</b> Comedy <b>✦</b> Music <b>✦</b> Dance <b>✦</b> The Ultimate Cardio <b>✦</b></span><span>Comedy <b>✦</b> Music <b>✦</b> Dance <b>✦</b> The Ultimate Cardio <b>✦</b> Comedy <b>✦</b> Music <b>✦</b> Dance <b>✦</b> The Ultimate Cardio <b>✦</b></span></div></div>
+<div class="marquee" aria-hidden="true"><div class="marquee-track"><span>New song: Los Angeles Airport <b>✦</b> Comedy <b>✦</b> Music <b>✦</b> Dance <b>✦</b> The Ultimate Cardio <b>✦</b> New song: Los Angeles Airport <b>✦</b> Comedy <b>✦</b> Music <b>✦</b> Dance <b>✦</b> The Ultimate Cardio <b>✦</b></span><span>New song: Los Angeles Airport <b>✦</b> Comedy <b>✦</b> Music <b>✦</b> Dance <b>✦</b> The Ultimate Cardio <b>✦</b> New song: Los Angeles Airport <b>✦</b> Comedy <b>✦</b> Music <b>✦</b> Dance <b>✦</b> The Ultimate Cardio <b>✦</b></span></div></div>
 <section class="shell section" aria-labelledby="selected-work-title">
   <div class="section-head"><div><p class="eyebrow">Selected work</p><h2 class="display" id="selected-work-title">Music videos, sets<br>and short-form</h2></div><a class="button" href="/videos/">View all videos →</a></div>
   <article class="feature-card">
@@ -267,7 +305,10 @@ ABOUT = """
 
 VIDEOS = f"""
 <section class="page-hero"><div class="shell page-hero-grid"><div><p class="eyebrow">Official videos and performance proof</p><h1 class="display">Watch the<br>work</h1><p class="lede">Music videos, choreography, live performance, comedy, and short-form personality from Collins Wewa—WAKANDABOY100.</p></div><div class="page-mark"><img src="/assets/images/wakandaboy100-dancer.svg" alt="WAKANDABOY100 dancer mark" width="300" height="330"></div></div></section>
-<section class="shell section"><article class="feature-card"><a class="video-poster" href="https://www.youtube.com/watch?v=EUQzS9nLWl8" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/EUQzS9nLWl8/maxresdefault.jpg" alt="Collins Wewa — My Baby official music video" width="1280" height="720"><span class="play-badge">Play</span></a><div class="feature-meta"><div><p class="eyebrow">Flagship release · 316K+ views</p><h3>My Baby</h3></div><a class="button primary" href="https://www.youtube.com/watch?v=EUQzS9nLWl8" target="_blank" rel="noopener">Watch now</a></div></article>
+<section class="shell section"><div class="section-head"><div><p class="eyebrow">New song · Official lyric video</p><h2 class="display">Los Angeles<br>Airport</h2></div><a class="button" href="{RELEASE['page']}">Song page →</a></div>
+{lyric_player()}
+<div class="section-head" style="margin-top:64px"><div><p class="eyebrow">Music videos</p><h2 class="display">Official<br>releases</h2></div></div>
+<article class="feature-card"><a class="video-poster" href="https://www.youtube.com/watch?v=EUQzS9nLWl8" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/EUQzS9nLWl8/maxresdefault.jpg" alt="Collins Wewa — My Baby official music video" width="1280" height="720"><span class="play-badge">Play</span></a><div class="feature-meta"><div><p class="eyebrow">Flagship release · 316K+ views</p><h3>My Baby</h3></div><a class="button primary" href="https://www.youtube.com/watch?v=EUQzS9nLWl8" target="_blank" rel="noopener">Watch now</a></div></article>
 <div class="card-grid">
 <a class="work-card" href="https://www.youtube.com/watch?v=6dMGPwwr9bQ" target="_blank" rel="noopener"><img loading="lazy" src="https://i.ytimg.com/vi/6dMGPwwr9bQ/maxresdefault.jpg" alt="Heart Broken music video thumbnail" width="640" height="400"><div class="card-body"><span class="kicker">Official music video</span><h3>Heart Broken</h3><p>Performance-driven visual storytelling.</p></div></a>
 <a class="work-card" href="https://www.youtube.com/watch?v=vwn4TQy9kw8" target="_blank" rel="noopener"><img loading="lazy" src="https://i.ytimg.com/vi/vwn4TQy9kw8/hqdefault.jpg" alt="Pull the Plug music video thumbnail" width="640" height="400"><div class="card-body"><span class="kicker">Produced and choreographed</span><h3>Pull the Plug</h3><p>A movement-led WAKANDABOY100 release.</p></div></a>
@@ -278,9 +319,10 @@ VIDEOS = f"""
 <div class="contact-panel"><div><h2>More from Collins Wewa</h2><p>Browse the full long-form catalog or jump directly into short-form creator videos.</p></div><div class="actions"><a class="button primary" href="https://www.youtube.com/@wakandaboy100" target="_blank" rel="noopener">YouTube channel</a><a class="button" href="https://www.youtube.com/@wakandaboy100/shorts" target="_blank" rel="noopener">YouTube Shorts</a></div></div></section>
 """
 
-MUSIC = """
+MUSIC = f"""
 <section class="page-hero"><div class="shell page-hero-grid"><div><p class="eyebrow">WAKANDABOY100 music</p><h1 class="display">Stream the<br>catalog</h1><p class="lede">Follow, save, and listen to Collins Wewa’s releases on the platform you already use.</p></div><div class="page-mark"><img src="/assets/images/wakandaboy100-dancer.svg" alt="WAKANDABOY100 dancer mark" width="300" height="330"></div></div></section>
-<section class="shell section"><div class="platform-grid">
+<section class="shell section"><div class="new-single"><a href="{RELEASE['page']}" aria-label="Watch the Los Angeles Airport lyric video"><img src="{RELEASE['poster']}" alt="Los Angeles Airport official lyric video poster" width="1280" height="720" loading="lazy"></a><div><p class="eyebrow">New single · Out now</p><h2 class="display">Los Angeles Airport</h2><p>{html.escape(RELEASE['summary'])}</p><div class="actions">{listen_buttons()}<a class="button" href="{RELEASE['page']}">Watch the lyric video →</a></div></div></div>
+<div class="platform-grid">
 <a class="platform-card" href="https://open.spotify.com/artist/25qMYd4ZAObBWwLwT7K1Jy" target="_blank" rel="noopener"><span>Spotify</span><span>→</span></a>
 <a class="platform-card" href="https://music.apple.com/us/artist/wakandaboy100/1559091732" target="_blank" rel="noopener"><span>Apple Music</span><span>→</span></a>
 <a class="platform-card" href="https://soundcloud.com/user-684213263" target="_blank" rel="noopener"><span>SoundCloud</span><span>→</span></a>
@@ -332,11 +374,34 @@ MERCH = f"""
 </section>
 <section class="collection-final"><img loading="lazy" src="/assets/images/ultimate-cardio-v2/collection-flatlay.webp" alt="The Ultimate Cardio apparel and headwear collection" width="1672" height="941"><div class="collection-final-scrim"></div><div class="shell collection-final-copy"><p class="eyebrow">The collection is live</p><h2 class="display">Choose your<br>colorway</h2><p>Made to order. Color and size availability varies by style.</p><a class="button light" href="{SHOP}" target="_blank" rel="noopener">Shop The Ultimate Cardio ↗</a></div></section>
 """
+SONG = f"""
+<section class="page-hero song-hero"><div class="shell page-hero-grid"><div><p class="eyebrow">WAKANDABOY100 · {html.escape(RELEASE['label'])}</p><h1 class="display">Los Angeles<br>Airport</h1><p class="lede">{html.escape(RELEASE['summary'])}</p></div><div class="page-mark"><img src="/assets/images/wakandaboy100-dancer.svg" alt="WAKANDABOY100 dancer mark" width="300" height="330"></div></div></section>
+<section class="shell section">
+  {lyric_player()}
+  <div class="contact-panel"><div><h2>Stream the single</h2><p>Los Angeles Airport by WAKANDABOY100 (Collins Wewa) is out now. Save it on the platform you use.</p></div><div class="actions">{listen_buttons()}</div></div>
+  <div class="actions"><a class="button" href="/videos/">More videos →</a><a class="button" href="/music/">All music →</a></div>
+</section>
+"""
+
+SONG_SCHEMA = {
+    "video": {
+        "@type": "VideoObject",
+        "name": f"{RELEASE['title']} ({RELEASE['label']})",
+        "description": RELEASE["summary"],
+        "thumbnailUrl": f"{SITE}{RELEASE['poster']}",
+        "contentUrl": f"{SITE}{RELEASE['video']}",
+        "uploadDate": RELEASE["released"],
+        "duration": RELEASE["duration"],
+        "creator": {"@id": PERSON["@id"]},
+    }
+}
+
 
 PAGES = [
     ("index.html", dict(title="WAKANDABOY100 (Collins Wewa) | Artist, Performer & Creator", description="Official home of WAKANDABOY100—Collins Wewa. Watch music videos, stream the catalog, request performances, and explore The Ultimate Cardio merchandise.", path="/", active="home", body=HOME, page_type="ProfilePage")),
     ("about/index.html", dict(title="Collins Wewa | About WAKANDABOY100", description="Meet Collins Wewa, the independent artist and performer known as WAKANDABOY100 across music, dance, comedy, video, and live entertainment.", path="/about/", active="about", body=ABOUT, page_type="ProfilePage", schema_extra={"mainEntity": {"@id": PERSON["@id"]}})),
-    ("videos/index.html", dict(title="WAKANDABOY100 Videos | Collins Wewa", description="Watch WAKANDABOY100 music videos and performance work by Collins Wewa, including My Baby, Heart Broken, Pull the Plug, and Dance With Me.", path="/videos/", active="videos", body=VIDEOS, page_type="CollectionPage")),
+    ("videos/index.html", dict(title="WAKANDABOY100 Videos | Collins Wewa", description="Watch WAKANDABOY100 music videos by Collins Wewa: the new Los Angeles Airport lyric video, My Baby, Heart Broken, Pull the Plug, and Dance With Me.", path="/videos/", active="videos", body=VIDEOS, page_type="CollectionPage")),
+    ("videos/los-angeles-airport/index.html", dict(title="Los Angeles Airport (Official Lyric Video) | WAKANDABOY100", description="Watch the official lyric video for Los Angeles Airport by WAKANDABOY100 (Collins Wewa): takeoff from LAX, first class and above the clouds.", path="/videos/los-angeles-airport/", active="videos", body=SONG, page_type="ItemPage", schema_extra=SONG_SCHEMA, og_image=f"{SITE}{RELEASE['og_image']}", og_alt="Los Angeles Airport official lyric video by WAKANDABOY100")),
     ("music/index.html", dict(title="WAKANDABOY100 Music | Stream Collins Wewa", description="Stream WAKANDABOY100 music by Collins Wewa on Spotify, Apple Music, SoundCloud, Audiomack, Pandora, and YouTube.", path="/music/", active="music", body=MUSIC, page_type="CollectionPage")),
     ("booking/index.html", dict(title="Book WAKANDABOY100 | Collins Wewa Performances", description="Request Collins Wewa—WAKANDABOY100—for birthdays, parties, private events, appearances, and performance opportunities.", path="/booking/", active="booking", body=BOOKING, page_type="ContactPage")),
     ("merch/the-ultimate-cardio/index.html", dict(title="The Ultimate Cardio Collection | WAKANDABOY100 Merch", description="Shop the full The Ultimate Cardio collection by WAKANDABOY100: T-shirts, hoodies, caps, beanies, tanks, crop tops, and mesh shorts from $29.", path="/merch/the-ultimate-cardio/", active="merch", body=MERCH, page_type="CollectionPage", schema_extra={"significantLink": SHOP}, og_image=f"{SITE}/assets/images/ultimate-cardio-og-v2.jpg?v=2", og_alt="The Ultimate Cardio full apparel and headwear collection by WAKANDABOY100")),

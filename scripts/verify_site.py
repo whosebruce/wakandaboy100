@@ -18,6 +18,7 @@ EXPECTED = {
     "index.html": "https://wakandaboy100.com/",
     "about/index.html": "https://wakandaboy100.com/about/",
     "videos/index.html": "https://wakandaboy100.com/videos/",
+    "videos/los-angeles-airport/index.html": "https://wakandaboy100.com/videos/los-angeles-airport/",
     "music/index.html": "https://wakandaboy100.com/music/",
     "booking/index.html": "https://wakandaboy100.com/booking/",
     "merch/the-ultimate-cardio/index.html": "https://wakandaboy100.com/merch/the-ultimate-cardio/",
@@ -52,8 +53,10 @@ class AuditParser(HTMLParser):
             self.h1_count += 1
         elif tag == "a" and isinstance(href, str):
             self.links.append(href)
-        elif tag in {"img", "script"} and isinstance(src, str):
+        elif tag in {"img", "script", "source"} and isinstance(src, str):
             self.assets.append(src)
+        if tag == "video" and isinstance(data.get("poster"), str):
+            self.assets.append(data["poster"])
         elif tag == "link" and isinstance(href, str):
             rel = data.get("rel") or ""
             if "canonical" in rel:
@@ -161,7 +164,8 @@ def main() -> int:
     required_terms = {
         "index.html": ["Collins Wewa", "WAKANDABOY100", "The Ultimate Cardio"],
         "about/index.html": ["Collins Wewa", "WAKANDABOY100"],
-        "videos/index.html": ["Comedy skits", "I’m Habibi, Without the Oil Money", "Instagram Reel"],
+        "videos/index.html": ["Comedy skits", "I’m Habibi, Without the Oil Money", "Instagram Reel", "Los Angeles Airport"],
+        "videos/los-angeles-airport/index.html": ["Los Angeles Airport", "WAKANDABOY100", "Collins Wewa", "VideoObject"],
         "merch/the-ultimate-cardio/index.html": ["The Ultimate Cardio", "WAKANDABOY100"],
     }
     for rel, terms in required_terms.items():
@@ -246,6 +250,10 @@ def main() -> int:
     for label, marker in required_style_guards.items():
         if marker not in style:
             fail(errors, f"style.css: missing {label}")
+
+    for media in (ROOT / "assets/video").glob("*.mp4"):
+        if media.stat().st_size > 50 * 1024 * 1024:
+            fail(errors, f"{media.relative_to(ROOT)}: over 50 MB; re-encode before committing")
 
     if errors:
         print("SITE VERIFICATION FAILED")
