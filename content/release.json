@@ -4,13 +4,14 @@
   "released": "2026-11-22",
   "duration": "PT3M13S",
   "page": "/videos/los-angeles-airport/",
-  "video": "/assets/video/los-angeles-airport-lyric-video.mp4",
+  "youtube_id": "JW-gdaF4cRw",
+  "youtube_url": "https://www.youtube.com/watch?v=JW-gdaF4cRw",
   "poster": "/assets/images/los-angeles-airport-lyric-video-poster.webp",
   "og_image": "/assets/images/los-angeles-airport-og.jpg",
   "summary": "Takeoff from LAX, first class, above the clouds and back down to LA: the official lyric video, with the WAKANDABOY100 dancer doing Collins Wewa’s own moves.",
   "listen": [
     {"label": "Apple Music", "url": "https://music.apple.com/us/album/los-angeles-airport/6788572322"},
     {"label": "Spotify", "url": "https://open.spotify.com/track/67wgSrI2LRYMzFWzBpWqRd"},
-    {"label": "YouTube", "url": "https://www.youtube.com/watch?v=wZ9rKKEhHkw"}
+    {"label": "YouTube", "url": "https://www.youtube.com/watch?v=JW-gdaF4cRw"}
   ]
 }
