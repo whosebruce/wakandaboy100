@@ -228,3 +228,26 @@ button,input,textarea{font:inherit}
   .campaign-hero{min-height:640px;align-items:flex-end}.campaign-backdrop{object-position:65% center}.campaign-scrim{background:linear-gradient(0deg,rgba(8,8,11,.98) 0%,rgba(8,8,11,.86) 42%,rgba(8,8,11,.22) 100%)}.campaign-copy{padding-block:54px}.campaign-copy h1,.campaign-copy h2{font-size:3.8rem}.campaign-copy p:not(.eyebrow){font-size:1rem}.collection-stats-grid{grid-template-columns:1fr 1fr}.collection-stats-grid div{min-height:112px;padding:20px 14px}.collection-stats-grid strong{font-size:2rem}.collection-stats-grid span{font-size:.68rem}.product-grid,.product-grid-preview{grid-template-columns:1fr}.product-meta strong{font-size:1.45rem}.spotlight,.spotlight-grid-light{padding-block:60px}.spotlight-copy h2{font-size:3.6rem}.collection-final{min-height:620px;align-items:flex-end}.collection-final>img{object-position:68% center}.collection-final-scrim{background:linear-gradient(0deg,rgba(8,8,11,.98),rgba(8,8,11,.78) 50%,rgba(8,8,11,.18))}.collection-final-copy{padding-block:52px}.collection-final-copy h2{font-size:3.8rem}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.marquee-track{animation:none}.button,.video-poster img{transition:none}}
+
+/* New release: Los Angeles Airport lyric video */
+.release-banner{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:11px 20px;background:var(--ink);color:var(--white);font-family:var(--ui);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.92rem;text-decoration:none;border-bottom:1px solid var(--dark-line)}
+.release-banner:hover .release-cta{transform:translateX(3px)}
+.release-tag{padding:3px 9px;background:var(--white);color:var(--ink);font-size:.78rem;letter-spacing:.18em}
+.release-text strong{font-family:var(--display);font-weight:400;font-size:1.15rem;letter-spacing:.04em}
+.release-cta{transition:transform .2s ease;color:#c9c9ce}
+.release-section{background:#0e0e12;color:var(--white);padding:80px 0}
+.release-section .eyebrow{color:#8f8f98}
+.release-section .section-head .intro{color:#c9c9ce}
+.lyric-player{margin:0;border-radius:8px;overflow:hidden;background:#000;box-shadow:0 24px 60px rgba(0,0,0,.25);border:1px solid var(--line)}
+.lyric-player video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#000}
+.release-listen{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-top:26px}
+.release-listen .actions{margin-top:0}
+.release-listen-label{font-family:var(--ui);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#a6a6ad;font-size:.88rem}
+.new-single{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center;margin-bottom:34px;border:2px solid var(--ink);padding:24px;background:var(--white)}
+.new-single img{width:100%;height:auto;border-radius:8px;display:block}
+.new-single h2{font-size:clamp(2.6rem,5vw,4rem)}
+.new-single p:not(.eyebrow){color:var(--muted);margin:12px 0 0}
+.section .lyric-player+.contact-panel{margin-top:34px}
+@media (max-width:900px){.new-single{grid-template-columns:1fr}.song-hero .page-mark{display:none}}
+@media (max-width:620px){.release-banner{font-size:.8rem;gap:8px;padding:10px 14px}.release-text strong{font-size:1rem}.release-section{padding:60px 0}.new-single{padding:16px}}
+@media (prefers-reduced-motion:reduce){.release-cta{transition:none}}
