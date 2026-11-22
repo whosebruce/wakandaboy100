@@ -180,15 +180,16 @@ def media_cards(items: list[dict]) -> str:
     return "".join(cards)
 
 
-def lyric_player(*, preload: str = "metadata") -> str:
-    """Self-hosted player for the new release (it is not on YouTube yet)."""
+def lyric_player() -> str:
+    """The lyric video, embedded from Collins Wewa's YouTube channel (views count on his upload)."""
     title = html.escape(f"{RELEASE['title']} ({RELEASE['label']})", quote=True)
+    src = f"https://www.youtube-nocookie.com/embed/{RELEASE['youtube_id']}?rel=0"
     return (
         f'<figure class="lyric-player">'
-        f'<video controls playsinline preload="{preload}" poster="{RELEASE["poster"]}" width="1920" height="1080" aria-label="{title}">'
-        f'<source src="{RELEASE["video"]}" type="video/mp4">'
-        f'Your browser cannot play this video. <a href="{RELEASE["video"]}">Download the lyric video</a>.'
-        f"</video></figure>"
+        f'<iframe src="{src}" title="{title}" width="1920" height="1080" loading="lazy" '
+        f'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" '
+        f'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
+        f"</figure>"
     )
 
 
@@ -389,7 +390,8 @@ SONG_SCHEMA = {
         "name": f"{RELEASE['title']} ({RELEASE['label']})",
         "description": RELEASE["summary"],
         "thumbnailUrl": f"{SITE}{RELEASE['poster']}",
-        "contentUrl": f"{SITE}{RELEASE['video']}",
+        "embedUrl": f"https://www.youtube.com/embed/{RELEASE['youtube_id']}",
+        "url": RELEASE["youtube_url"],
         "uploadDate": RELEASE["released"],
         "duration": RELEASE["duration"],
         "creator": {"@id": PERSON["@id"]},

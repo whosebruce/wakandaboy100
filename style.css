@@ -239,7 +239,7 @@ button,input,textarea{font:inherit}
 .release-section .eyebrow{color:#8f8f98}
 .release-section .section-head .intro{color:#c9c9ce}
 .lyric-player{margin:0;border-radius:8px;overflow:hidden;background:#000;box-shadow:0 24px 60px rgba(0,0,0,.25);border:1px solid var(--line)}
-.lyric-player video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#000}
+.lyric-player iframe{display:block;width:100%;height:auto;aspect-ratio:16/9;border:0;background:#000}
 .release-listen{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-top:26px}
 .release-listen .actions{margin-top:0}
 .release-listen-label{font-family:var(--ui);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#a6a6ad;font-size:.88rem}

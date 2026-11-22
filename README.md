@@ -11,7 +11,7 @@ Collins Wewa is an independent artist and performer working across music, dance,
 | `/` | Brand home: merch campaign, artist intro, selected videos and streaming links |
 | `/about/` | Collins Wewa biography and entity page |
 | `/videos/` | Music video, performance and comedy catalog |
-| `/videos/los-angeles-airport/` | "Los Angeles Airport" official lyric video (self-hosted player) and streaming links |
+| `/videos/los-angeles-airport/` | "Los Angeles Airport" official lyric video (YouTube embed) and streaming links |
 | `/music/` | Verified streaming profiles |
 | `/booking/` | Private-event and performance requests (currently through Instagram DM) |
 | `/merch/the-ultimate-cardio/` | Full nine-style collection page with links to the official shop |
@@ -56,7 +56,7 @@ The seven route pages are generated. Edit `scripts/build_site.py` (page template
 
 ## New release: Los Angeles Airport
 
-`content/release.json` drives the new-song banner and dark release section on the home page, the featured player on `/videos/`, the new-single card on `/music/`, and the song page. The lyric video is not on YouTube yet, so it is self-hosted at `assets/video/los-angeles-airport-lyric-video.mp4` (web encode under 50 MB, which `verify_site.py` enforces) with the poster `assets/images/los-angeles-airport-lyric-video-poster.webp` and share card `assets/images/los-angeles-airport-og.jpg`. Once it is on YouTube, the player can switch to the YouTube link and the MP4 can be removed.
+`content/release.json` drives the new-song banner and dark release section on the home page, the featured player on `/videos/`, the new-single card on `/music/`, and the song page. The player embeds the lyric video from Collins Wewa's YouTube channel (`youtube_id`, privacy-enhanced `youtube-nocookie.com` embed, so views count on his upload). The poster `assets/images/los-angeles-airport-lyric-video-poster.webp` is still used for the new-single card and the page schema, and `assets/images/los-angeles-airport-og.jpg` is the share card. If a video is ever self-hosted under `assets/video/`, `verify_site.py` keeps each MP4 under 50 MB.
 
 ## Adding public media
 

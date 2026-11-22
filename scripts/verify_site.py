@@ -251,6 +251,15 @@ def main() -> int:
         if marker not in style:
             fail(errors, f"style.css: missing {label}")
 
+    release = json.loads((ROOT / "content/release.json").read_text(encoding="utf-8"))
+    embed = f"youtube-nocookie.com/embed/{release['youtube_id']}"
+    for rel in ("index.html", "videos/index.html", "videos/los-angeles-airport/index.html"):
+        text = (ROOT / rel).read_text(encoding="utf-8")
+        if text.count(embed) != 1:
+            fail(errors, f"{rel}: expected one embed of the lyric video ({embed})")
+        if "los-angeles-airport-lyric-video.mp4" in text:
+            fail(errors, f"{rel}: still points at the removed self-hosted MP4")
+
     for media in (ROOT / "assets/video").glob("*.mp4"):
         if media.stat().st_size > 50 * 1024 * 1024:
             fail(errors, f"{media.relative_to(ROOT)}: over 50 MB; re-encode before committing")
